@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "workspace_status": "framework_ready_for_local_validation",
+  "workspace_status": "framework_ready_for_self_bootstrapping_local_audit",
   "revenue_stage": "first_verified_dollar",
   "active_experiment_id": null,
-  "active_task": "Validate the committed Autobank framework and run the bounded first Pi setup audit without external mutations.",
-  "last_completed_action": "The operating framework, deterministic validator, validator self-tests, and bounded setup-audit prompt were committed to main.",
-  "next_intended_action": "Pull main on the Autobank machine, run npm test and npm run validate:strict, then execute SETUP_AUDIT_PROMPT.md through /task-auto.",
+  "active_task": "Run the self-bootstrapping bounded Pi setup, documentation, and runtime audit without revenue work or external mutations outside this repository.",
+  "last_completed_action": "The setup-audit prompt, README, and runbook were refreshed so Pi can synchronize, validate, audit documentation and runtime, report, commit, push, and verify remote state without manual preparation.",
+  "next_intended_action": "Start Pi, invoke /task-auto, and paste the complete prompt from SETUP_AUDIT_PROMPT.md; Pi must perform all checkout, test, documentation, audit, checkpoint, and push steps itself.",
   "blockers": [],
   "open_owner_request_ids": [],
   "verified_financials_usd": {
@@ -20,8 +20,8 @@
   },
   "last_external_action_id": null,
   "last_evidence_id": null,
-  "last_checkpoint_commit": "207bf6e49ebdd987e44a3b30ca6f137d7f3ca592",
+  "last_checkpoint_commit": "f0d1f5d42f922cb5122a5546d78cbac9875369ce",
   "working_tree_expected_clean": true,
-  "updated_at_utc": null,
+  "updated_at_utc": "2026-07-27",
   "updated_by": "setup_assistant"
 }
