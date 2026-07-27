@@ -21,8 +21,8 @@
 - Working directory confirmed: `C:\Projects\autobank`
 - Git checkout target: `https://github.com/flipjam/autobank.git`
 - Branch: `main`
-- Local HEAD: `6222f0f`
-- Remote HEAD (`origin/main`): `6222f0f`
+- Local HEAD: `9aa9e71`
+- Remote HEAD (`origin/main`): `9aa9e71`
 - Working tree before/after edits: clean at checkpoints (verified with `git status --short --branch`)
 - Fast-forward synchronization policy was followed (no force-push/rebase/clean/restore used)
 
@@ -58,6 +58,7 @@ Reviewed all tracked Markdown documents plus required JSON/script/CSV controls:
 - `EVIDENCE_INDEX.md`
 - `RUNBOOK.md`
 - `SETUP_AUDIT_PROMPT.md`
+- `WEB_ACCESS_CALIBRATION_LOG.md` (setup calibration evidence)
 - `OPPORTUNITIES.md`
 - `EXPERIMENT_LOG.md`
 - `LEDGER.csv`
