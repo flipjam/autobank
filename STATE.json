@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "workspace_status": "bootstrap_pending",
+  "revenue_stage": "first_verified_dollar",
+  "active_experiment_id": null,
+  "active_task": "Validate the Autobank operating framework and local Pi runtime without external mutations.",
+  "last_completed_action": "Approved operating policy and initial control documents were committed.",
+  "next_intended_action": "Run deterministic workspace validation, then perform a bounded Pi audit and recovery smoke test.",
+  "blockers": [],
+  "open_owner_request_ids": [],
+  "verified_financials_usd": {
+    "gross_revenue": 0,
+    "platform_fees": 0,
+    "processing_fees": 0,
+    "approved_expenses": 0,
+    "refunds_chargebacks": 0,
+    "taxes_withheld": 0,
+    "net_revenue": 0,
+    "net_cash_after_withholding": 0
+  },
+  "last_external_action_id": null,
+  "last_evidence_id": null,
+  "last_checkpoint_commit": null,
+  "working_tree_expected_clean": true,
+  "updated_at_utc": null,
+  "updated_by": "setup"
+}
