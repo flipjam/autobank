@@ -9,6 +9,7 @@
   },
   "scripts": {
     "validate": "node scripts/validate-workspace.mjs",
-    "validate:strict": "node scripts/validate-workspace.mjs --strict"
+    "validate:strict": "node scripts/validate-workspace.mjs --strict",
+    "test": "node scripts/test-validator.mjs"
   }
 }
