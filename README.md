@@ -12,6 +12,7 @@ The setup-audit command and latest completion state are in:
 
 - `SETUP_AUDIT_REPORT.md`
 - `RESUME_TEST_PLAN.md`
+- `WEB_ACCESS_CALIBRATION_LOG.md`
 
 ## One-paste setup audit
 
@@ -28,7 +29,7 @@ That prompt requires Pi to:
 7. Commit and push every intended public-safe change.
 8. Verify a clean tree and matching local/remote `main` commit.
 
-Current audit outcome is `READY WITH BLOCKERS` due unresolved runtime cost-boundary verification.
+Current audit outcome is `READY WITH BLOCKERS` with temporary web-search calibration authorized and routine inference lock still unresolved.
 
 ## Governing documents
 

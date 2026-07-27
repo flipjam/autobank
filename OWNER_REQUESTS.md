@@ -4,9 +4,40 @@ This file is the durable queue for actions, information, permissions, accounts, 
 
 ## Open requests
 
-### REQ-20260727-001 — Validate and lock non-metered runtime inference + web-access
+### REQ-20260727-002 — Enforce routine inference to local minipc only
 
 - **Status:** open
+- **Created at (UTC):** 2026-07-27T23:17:35Z
+- **Experiment or campaign:** setup only; no active revenue campaign
+- **Category:** policy
+- **Request:**
+  Confirm that routine unattended Pi inference is locked to the approved local provider chain and cannot silently fall back to subscription-backed inference:
+  1) set the default unattended provider for routine work to `minipc`; and
+  2) block automatic fallback to web-authenticated or metered inference models from routine execution paths.
+- **Exact owner action needed:**
+  Update local Pi runtime settings so local inference is the default for unattended work and verify with a deterministic proof (for example a local-only inference smoke test at startup).
+- **Why it is required:**
+  The setup currently requires explicit proof that routine inference is non-metered before campaign-risk operations.
+- **What becomes possible after completion:**
+  Routine setup and campaign work can proceed without metered surprise inference costs.
+- **Minimum permission or information required:**
+  Owner access to local Pi runtime defaults and routing policy.
+- **Cost:** $0
+- **Risks:**
+  Misconfiguration can trigger unintended metered inference fallback.
+- **Free or lower-risk alternatives attempted:**
+  Local inference endpoint was tested explicitly (`minipc`) and works in a direct command call, but default unattended routing remains owner-controlled.
+- **Can productive work continue while waiting:** yes
+- **Deadline or opportunity expiration:** none
+- **Notification method used:** local report and repository state files
+- **Owner response:**
+- **Resolution evidence:**
+  Not yet available.
+- **Closed at (UTC):** 
+
+### REQ-20260727-001 — Validate and lock non-metered runtime inference + web-access
+
+- **Status:** answered
 - **Created at (UTC):** 2026-07-27T20:10:00Z
 - **Experiment or campaign:** setup audit
 - **Category:** policy
@@ -31,9 +62,14 @@ This file is the durable queue for actions, information, permissions, accounts, 
 - **Deadline or opportunity expiration:** none
 - **Notification method used:** local report and repository state files
 - **Owner response:**
+  Temporary calibration authorization granted on 2026-07-27 for web search only:
+  - use explicit `provider: "openai"` and `workflow: "none"`
+  - use existing Codex subscription auth only
+  - no fallback to other providers
+  - no API key configuration
 - **Resolution evidence:**
-  Not yet available.
-- **Closed at (UTC):** 
+  EVD-20260727-004, `WEB_ACCESS_CALIBRATION_LOG.md`.
+- **Closed at (UTC):** 2026-07-27T23:17:35Z
 
 ## Request template
 

@@ -1,6 +1,6 @@
 # Evidence Index
 
-Evidence supports decisions, external actions, experiment results, financial claims, and financial claims without exposing secrets or unnecessary personal information.
+Evidence supports decisions, external actions, experiment results, and financial claims without exposing secrets or unnecessary personal information.
 
 ## Evidence records
 
@@ -55,6 +55,22 @@ Evidence supports decisions, external actions, experiment results, financial cla
 - **Verifier and method:** native `agent_browser` tool, open+snapshot
 - **Notes:** No form submission, login, or external mutation performed.
 
+### EVD-20260727-004 — Calibrated web-search authorization run (temporary)
+
+- **Created at (UTC):** 2026-07-27T23:17:35Z
+- **Evidence type:** test_output
+- **Supports:** temporary web-access calibration authorization and usage logging
+- **Public-safe summary:** Ran one explicit `web_search` call with `{ provider: "openai", workflow: "none" }` and recorded the call in `WEB_ACCESS_CALIBRATION_LOG.md`.
+- **Source/account alias:** autobank-local
+- **Source date/time:** 2026-07-27T23:17:35Z
+- **Repository path or external reference:** `WEB_ACCESS_CALIBRATION_LOG.md` and runtime call output
+- **Integrity information:** Result contains only public sources and non-sensitive answer text.
+- **Redactions applied:** None required.
+- **Private original location:** none
+- **Retention/review date:** 2026-10-01
+- **Verification result:** verified
+- **Verifier and method:** `web_search` tool call (explicit openai provider)
+- **Notes:** This verifies that the temporary web-access route can run as authorized; it does not prove routine inference non-metered defaults.
 
 ### EVD-YYYYMMDD-NNN — Template
 

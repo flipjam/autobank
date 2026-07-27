@@ -105,7 +105,7 @@ Reviewed all tracked Markdown documents plus required JSON/script/CSV controls:
 - `~/.pi/web-search.json` has no explicit provider routing fields beyond legacy shortcuts.
 - `pi-web-access` auto chain includes `openai` fallback before MCP alternatives.
 - No paid/metered-safe classification was possible without explicit owner-approved config changes.
-- No web-search nor fetch-content calls were executed since this is pending and cost boundary is currently uncertain.
+- Initial report period had no web-search nor fetch-content calls executed before this calibration decision; afterward, one explicit temporary openai call was logged under controlled calibration conditions.
 
 ## Agent Browser, statusline, and Tailscale checks
 
@@ -130,14 +130,31 @@ No owner-facing remote service was started during this audit.
 
 ### Open blockers / owner-only items
 
-- **`REQ-20260727-001`**: confirm and lock non-metered defaults for unattended inference and `pi-web-access` (policy boundary verification).
+- **`REQ-20260727-001`**: treated as answered for temporary web-search calibration only; see post-decision update.
+- **`REQ-20260727-002`**: pending verification and lock for unattended inference to default local `minipc` with no metered fallback.
 
 ## Evidence references
 
 - `EVD-20260727-001` — validation and repository sync outputs
 - `EVD-20260727-002` — local inference smoke-test output
 - `EVD-20260727-003` — agent-browser smoke-test output
+- `EVD-20260727-004` — temporary web-access calibration run (openai workflow none)
+
+## Post-decision operational update (2026-07-27T23:17:35Z)
+
+Owner authorized a temporary web-access calibration for startup auditing under explicit limits:
+
+- explicit `provider: "openai"`
+- `workflow: "none"`
+- no OpenAI API key configuration
+- no fallback to other providers
+- usage logging in `WEB_ACCESS_CALIBRATION_LOG.md`
+- one successful call completed and recorded
+
+`REQ-20260727-001` is treated as answered for this temporary calibration authorization only.
+
+`REQ-20260727-002` remains open for routine inference lock verification.
 
 ## Recommended next step
 
-Resolve `REQ-20260727-001` to lock default inference and web-access to a verified non-metered path, then re-run the setup audit checks from a clean tree and re-verify local/remote commit alignment.
+Resolve `REQ-20260727-002` by proving routine unattended inference remains on local `minipc` defaults without automatic metered fallback; then re-run setup runtime checks from a clean tree and re-verify local/remote commit alignment.

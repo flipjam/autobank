@@ -1,16 +1,16 @@
 {
   "schema_version": 1,
-  "workspace_status": "framework_ready_with_non_metered_runtime_blockers",
+  "workspace_status": "framework_ready_with_inference_lock_blocker",
   "revenue_stage": "first_verified_dollar",
   "active_experiment_id": null,
-  "active_task": "Run and complete the bounded setup/runtime audit specified in SETUP_AUDIT_PROMPT.md.",
-  "last_completed_action": "Synchronized checkout to origin/main, ran npm test and npm run validate:strict (pass), inventoried required runtime dependencies, performed agent-browser smoke-read test, and produced setup-audit report/plan with one unresolved non-metered-boundary blocker.",
-  "next_intended_action": "Await owner response to REQ-20260727-001 and re-run Pi setup runtime checks once inference and web-access non-metered boundaries are confirmed.",
+  "active_task": "Apply the temporary web-access calibration authorization and continue setup runtime verification while routine inference lock remains pending.",
+  "last_completed_action": "Processed the owner temporary calibration authorization for pi-web-access, ran one explicit openai/web-search calibration call under workflow none with no fallback, and recorded usage metadata.",
+  "next_intended_action": "Complete the remaining calibration web-search sequence (up to 25 successful calls) if needed, then obtain explicit owner confirmation for non-metered local inference defaults and resume setup runtime checks.",
   "blockers": [
-    "REQ-20260727-001"
+    "REQ-20260727-002"
   ],
   "open_owner_request_ids": [
-    "REQ-20260727-001"
+    "REQ-20260727-002"
   ],
   "verified_financials_usd": {
     "gross_revenue": 0,
@@ -24,7 +24,7 @@
   },
   "last_external_action_id": null,
   "last_evidence_id": null,
-  "last_checkpoint_commit": "f3f200088cf5f361b4d9c47df2c680910a287621",
+  "last_checkpoint_commit": "6b43d2b",
   "working_tree_expected_clean": true,
   "updated_at_utc": "2026-07-27",
   "updated_by": "setup_audit_pi"

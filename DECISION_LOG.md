@@ -46,6 +46,27 @@ This log preserves consequential operational decisions and their evidence. Routi
 - **Outcome and later evidence:** `SETUP_AUDIT_REPORT.md` and `RESUME_TEST_PLAN.md` will reference this blocker.
 - **Superseded by:**
 
+### DEC-20260727-003 — Temporary owner-authorized web search calibration for setup
+
+- **Status:** adopted
+- **Decided at (UTC):** 2026-07-27T23:17:35Z
+- **Decision maker:** owner
+- **Experiment/campaign:** setup only; no active revenue campaign
+- **Question:** Can a bounded temporary web-search calibration run under explicit constraints while routine inference lock remains unresolved?
+- **Context and evidence:** Owner approved a temporary web-access calibration permitting only explicit `openai` provider and `workflow: "none"`, Codex-authenticated usage, no fallback providers, and a cap of 25 successful web-search calls.
+- **Options considered:** Hold all web research until routine inference lock is verified; or permit bounded calibration with explicit limits and logging.
+- **Decision:** Accept bounded web-access calibration and proceed with a usage log under strict constraints while keeping the inference-blocker request open.
+- **Rationale:** Maintains safe bounded progress and provides objective usage evidence for the owner without violating the routine non-metered default requirement.
+- **Policy and authorization basis:** `AUTOBANK_POLICY.md` and explicit owner temporary authorization.
+- **Expected benefit:** Controlled calibration of web research with auditable call history and reduced ambiguity about temporary auth path.
+- **Risks and mitigations:** Drift into additional/parallel searches. Mitigated by one-search-at-a-time rule, explicit provider/workflow, and hard cap on successful calls.
+- **Reversible:** yes
+- **Review trigger or date:** after inference lock is verified and web-search calibration cap is reached or stopped.
+- **Owner approval required:** yes
+- **Owner approval reference:** temporary calibration decision.
+- **Outcome and later evidence:** `OWNER_REQUESTS.md` updated (web-access temp authorization recorded), `WEB_ACCESS_CALIBRATION_LOG.md`, and `EVD-20260727-004`.
+- **Superseded by:**
+
 ### DEC-YYYYMMDD-NNN — Short title
 
 - **Status:** proposed | adopted | rejected | superseded
