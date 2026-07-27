@@ -1,8 +1,8 @@
 # Autobank Runbook
 
-This runbook defines deterministic startup, recovery, checkpoint, owner-request, and emergency-stop behavior. `AUTOBANK_POLICY.md`, `CONTROL.json`, and `AUTHORIZED_RESOURCES.md` take precedence over this document.
+This runbook defines deterministic startup, recovery, checkpoint, owner-request, and emergency-stop behavior. `AUTOBANK_POLICY.md`, `CONTROL.json`, `MISSION.md`, and `AUTHORIZED_RESOURCES.md` take precedence over this document.
 
-## 1. Start or resume a session
+## 1. Start or resume a normal session
 
 From PowerShell:
 
@@ -13,6 +13,8 @@ git pull --ff-only
 npm run validate
 pi
 ```
+
+Never reset, clean, stash, rebase, force-push, or discard unexpected local changes merely to make synchronization succeed. Inspect and preserve them; create an owner request when their intent cannot be established safely.
 
 Inside Pi, follow the read order in `AGENTS.md`.
 
@@ -27,6 +29,10 @@ Before doing work, reconcile:
 
 If repository state and external reality disagree, preserve both observations, stop the affected action, and investigate before changing records or retrying anything.
 
+### Owner one-paste setup-audit entry
+
+For the current initial setup audit, the owner may start Pi, invoke `/task-auto`, and paste the complete prompt from `SETUP_AUDIT_PROMPT.md`. The prompt makes Pi perform checkout synchronization, validation, documentation review, runtime auditing, reporting, commit, push, and remote-HEAD verification itself. No manual preparation is required unless Pi records a genuine owner-only blocker.
+
 ## 2. Behavior by control state
 
 ### `setup`
@@ -35,17 +41,19 @@ Allowed:
 
 - Local repository work
 - Deterministic tests
+- Documentation-freshness review and operator-document corrections
 - Runtime and recovery testing
-- Read-only public web research
+- Read-only public web research through a proven non-metered path
 - Agent Browser smoke tests without authentication or external mutation
 - Drafting proposed experiments and owner requests
+- Commits and pushes to the authorized Autobank repository
 
 Not allowed:
 
 - Revenue experiments
 - Account creation or login to newly authorized services
-- Forms, submissions, messages, listings, deployments, purchases, or external repository mutations
-- Any action that changes external data or creates a commitment
+- Forms, submissions, messages, listings, deployments, purchases, or external repository mutations outside `flipjam/autobank`
+- Any action that changes other external data or creates a commitment
 
 ### `active`
 
@@ -68,14 +76,28 @@ Reconcile records, close sessions, preserve evidence, and wait for a new owner-a
 Run:
 
 ```powershell
-npm run validate
+npm test
+npm run validate:strict
 ```
 
-Validation checks required files, JSON structure, control invariants, ledger headers, ignored secret locations, and obvious tracked-secret indicators.
+`npm test` exercises positive and negative validator behavior. Strict validation checks required files, JSON structure, control invariants, ledger headers, ignored secret locations, duplicate record identifiers, tracked sensitive paths, and common tracked-secret indicators.
 
 A validation failure affecting authority, spending, credentials, financial truth, or emergency control is a stop condition. Record a blocker or owner request when it cannot be corrected safely within existing authority.
 
-## 4. Begin a campaign
+## 4. Documentation freshness
+
+At meaningful setup and campaign boundaries, review tracked documentation and operational records for:
+
+- Current control state, phase, next action, and revenue totals
+- Repository, path, branch, package, and command accuracy
+- Internal cross-reference consistency
+- Stale completion or future-tense statements
+- Agreement between documented procedures and deterministic scripts
+- Clear separation of owner-controlled and operator-maintained documents
+
+Pi may update operator-maintained documentation and records. It must not silently change policy, authority, permissions, milestone order, spending limits, campaign activation, or authorized resources. Proposed owner-controlled changes belong in `OWNER_REQUESTS.md` until explicitly approved.
+
+## 5. Begin a campaign
 
 A campaign may begin only after the owner commits all of the following:
 
@@ -88,7 +110,7 @@ A campaign may begin only after the owner commits all of the following:
 
 Pi cannot activate its own campaign.
 
-## 5. Before an external action
+## 6. Before an external action
 
 1. Pull and re-read `CONTROL.json`.
 2. Confirm the active campaign and experiment.
@@ -104,7 +126,7 @@ Pi cannot activate its own campaign.
 
 A timeout, crash, or ambiguous response is not permission to retry. Verify external state first.
 
-## 6. Checkpointing
+## 7. Checkpointing
 
 Checkpoint and push:
 
@@ -114,21 +136,22 @@ Checkpoint and push:
 - Before a long or failure-prone operation
 - Before yielding, ending, restarting, or compacting a session
 - When a blocker, owner request, or material decision is created
+- After a documentation-freshness pass that changes tracked files
 
 A checkpoint should update the relevant durable records and leave the tree clean. If it cannot, document the exact uncommitted state and reason in `STATE.json`.
 
 Never commit secrets, private evidence, browser profiles, downloads, authenticated session state, or personal data.
 
-## 7. Owner-only blocker
+## 8. Owner-only blocker
 
 1. Create a structured `REQ-...` entry in `OWNER_REQUESTS.md`.
 2. Update `STATE.json` blocker and open-request fields.
 3. Notify the owner through the approved remote interface.
 4. Do not expose or request secrets through prompts or Git.
 5. Continue unrelated productive work when safe.
-6. Do not treat the request as approved until an explicit owner response and any required authorization commit exist.
+6. Do not treat the request as approved until an explicit owner response and any required repository policy or authorization update exist.
 
-## 8. Revenue verification and accounting
+## 9. Revenue verification and accounting
 
 For every financial event:
 
@@ -144,7 +167,7 @@ For every financial event:
 
 Pending invoices, proposals, promised bounties, views, downloads, or platform estimates must not be entered as verified revenue.
 
-## 9. Recovery after interruption
+## 10. Recovery after interruption
 
 1. Do not repeat the last intended action automatically.
 2. Pull the latest repository state and run validation.
@@ -154,7 +177,7 @@ Pending invoices, proposals, promised bounties, views, downloads, or platform es
 6. Retry only when non-occurrence is confirmed and retry remains authorized.
 7. If external truth cannot be determined, stop the affected path and create an owner request.
 
-## 10. Emergency stop
+## 11. Emergency stop
 
 The owner may issue `STOP AUTOBANK`, terminate Pi, or commit `CONTROL.json` with:
 
@@ -176,7 +199,7 @@ On receiving or detecting an emergency stop, Pi must:
 6. Notify the owner.
 7. Remain stopped until the owner explicitly commits a resume decision.
 
-## 11. Close an experiment or campaign
+## 12. Close an experiment or campaign
 
 - Reconcile every planned, attempted, and completed external action.
 - Reconcile ledger and evidence records.
@@ -185,8 +208,11 @@ On receiving or detecting an emergency stop, Pi must:
 - Record the result and invalidated assumptions honestly.
 - Identify reusable assets and the next recommended bounded experiment.
 - Update `STATE.json` and, when owner-directed, `CONTROL.json`.
+- Refresh affected documentation.
 - Run validation and push a clean final checkpoint.
 
-## 12. Current next operation
+## 13. Current next operation
 
-The current authorized operation is a bounded setup audit only. It must prove that Pi can read the framework, validate it, update durable state, commit and push a harmless checkpoint, survive a controlled interruption, and resume without taking an external action.
+The current authorized operation is the self-bootstrapping bounded setup audit in `SETUP_AUDIT_PROMPT.md`. It must synchronize the checkout safely; run deterministic tests; review all tracked documentation for freshness; verify the approved local inference, `pi-web-access`, Agent Browser, statusline, and Tailscale boundaries; produce `SETUP_AUDIT_REPORT.md` and `RESUME_TEST_PLAN.md`; commit and push every intended public-safe change; and verify local and remote `main` match.
+
+It must not activate a campaign, begin revenue work, change owner authority, or mutate external data outside the Autobank repository.
