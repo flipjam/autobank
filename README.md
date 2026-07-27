@@ -4,29 +4,26 @@ Autobank is a controlled experiment in using Pi and a local inference box to pur
 
 ## Current status
 
-**Framework ready for local validation. External revenue actions are disabled.**
+**Framework committed; self-bootstrapping local setup audit is the next operation. External revenue actions remain disabled.**
 
-`CONTROL.json` is currently in `setup`. Pi may validate the workspace, test recovery, perform local work, and conduct read-only public research. It may not submit, publish, message, purchase, create accounts, log into newly authorized services, or otherwise mutate external data until the owner activates a bounded campaign.
+`CONTROL.json` is in `setup`. Pi may synchronize and validate this repository, audit documentation, test runtime and recovery behavior, perform local work, and conduct tightly bounded read-only public checks. It may not submit, publish, message, purchase, create accounts, accept terms, authenticate to newly authorized services, or otherwise mutate external data until the owner activates a bounded campaign.
 
-The next bounded operation is defined in `SETUP_AUDIT_PROMPT.md`.
+The complete next operation is defined in `SETUP_AUDIT_PROMPT.md`.
 
-## Start here
+## One-paste setup audit
 
-1. Read `AGENTS.md`.
-2. Read `AUTOBANK_POLICY.md` and `CONTROL.json`.
-3. Run the validator self-tests and strict validation.
-4. Follow `RUNBOOK.md`.
-5. Run the setup audit through Pi `/task-auto` using `SETUP_AUDIT_PROMPT.md`.
+The owner does not need to pull, validate, or prepare the checkout manually. Start Pi, invoke `/task-auto`, and paste the complete prompt from `SETUP_AUDIT_PROMPT.md`. That prompt requires Pi to:
 
-On the Windows Autobank machine:
+1. Safely locate and fast-forward the authorized checkout at `C:\Projects\autobank`.
+2. Preserve unexpected local work instead of resetting or discarding it.
+3. Run validator self-tests and strict validation.
+4. Review all tracked documentation for freshness and consistency.
+5. Audit the local inference, web-access, browser, statusline, and remote boundaries.
+6. Produce the setup-audit report and controlled resume-test plan.
+7. Commit and push every intended public-safe change.
+8. Verify a clean tree and matching local/remote `main` commit.
 
-```powershell
-cd C:\Projects\autobank
-git pull --ff-only
-npm test
-npm run validate:strict
-pi
-```
+This audit is not authorization to begin revenue work.
 
 ## Governing documents
 
@@ -36,6 +33,7 @@ pi
 - `AUTHORIZED_RESOURCES.md` — exact accounts, tools, repositories, and permission boundaries
 - `AGENTS.md` — mandatory operating instructions and startup read order
 - `RUNBOOK.md` — startup, campaign, external-action, recovery, accounting, and emergency procedures
+- `SETUP_AUDIT_PROMPT.md` — complete self-bootstrapping first `/task-auto` specification
 
 ## Durable operating records
 
@@ -58,11 +56,25 @@ npm run validate
 npm run validate:strict
 ```
 
-A failed authority, security, control, or financial check is a stop condition for affected work.
+A failed authority, security, control, or financial check is a stop condition for affected work. The setup-audit prompt makes Pi run these commands itself before and after material changes.
+
+## Manual recovery entry point
+
+When manual recovery is necessary:
+
+```powershell
+cd C:\Projects\autobank
+git status --short --branch
+git pull --ff-only
+npm run validate:strict
+pi
+```
+
+Never reset, clean, rebase, force-push, or discard unexpected local work merely to synchronize the repository.
 
 ## Privacy and security
 
-This repository is public. Never commit credentials, browser profiles, authenticated session state, private evidence, banking or tax information, customer personal data, or unredacted personal records. Approved local-only locations such as `private-evidence/` are ignored by Git.
+This repository is public. Never commit credentials, browser profiles, authenticated session state, private evidence, banking or tax information, customer personal data, local inference secrets, or unredacted personal records. Approved local-only locations such as `private-evidence/` are ignored by Git.
 
 ## Revenue truth
 
