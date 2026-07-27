@@ -1,0 +1,14 @@
+{
+  "name": "autobank-operator",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Deterministic operating records and validation for the Autobank Pi revenue experiment.",
+  "type": "module",
+  "engines": {
+    "node": ">=22.19.0"
+  },
+  "scripts": {
+    "validate": "node scripts/validate-workspace.mjs",
+    "validate:strict": "node scripts/validate-workspace.mjs --strict"
+  }
+}
