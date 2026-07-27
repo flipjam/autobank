@@ -1,13 +1,17 @@
 {
   "schema_version": 1,
-  "workspace_status": "framework_ready_for_self_bootstrapping_local_audit",
+  "workspace_status": "framework_ready_with_non_metered_runtime_blockers",
   "revenue_stage": "first_verified_dollar",
   "active_experiment_id": null,
-  "active_task": "Run the self-bootstrapping bounded Pi setup, documentation, and runtime audit without revenue work or external mutations outside this repository.",
-  "last_completed_action": "The setup-audit prompt and current operating documentation were refreshed, the owner decision for Pi to perform its own preparation was recorded, and all intended setup changes were committed to main.",
-  "next_intended_action": "Start Pi, invoke /task-auto, and paste the complete prompt from SETUP_AUDIT_PROMPT.md; Pi must perform all checkout, test, documentation, audit, checkpoint, push, and remote-verification steps itself.",
-  "blockers": [],
-  "open_owner_request_ids": [],
+  "active_task": "Run and complete the bounded setup/runtime audit specified in SETUP_AUDIT_PROMPT.md.",
+  "last_completed_action": "Synchronized checkout to origin/main, ran npm test and npm run validate:strict (pass), inventoried required runtime dependencies, performed agent-browser smoke-read test, and produced setup-audit report/plan with one unresolved non-metered-boundary blocker.",
+  "next_intended_action": "Await owner response to REQ-20260727-001 and re-run Pi setup runtime checks once inference and web-access non-metered boundaries are confirmed.",
+  "blockers": [
+    "REQ-20260727-001"
+  ],
+  "open_owner_request_ids": [
+    "REQ-20260727-001"
+  ],
   "verified_financials_usd": {
     "gross_revenue": 0,
     "platform_fees": 0,
@@ -20,8 +24,8 @@
   },
   "last_external_action_id": null,
   "last_evidence_id": null,
-  "last_checkpoint_commit": "6b529a358ae39e51909185ab96751ce7d4a654fa",
+  "last_checkpoint_commit": "f3f200088cf5f361b4d9c47df2c680910a287621",
   "working_tree_expected_clean": true,
   "updated_at_utc": "2026-07-27",
-  "updated_by": "setup_assistant"
+  "updated_by": "setup_audit_pi"
 }

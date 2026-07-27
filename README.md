@@ -4,18 +4,23 @@ Autobank is a controlled experiment in using Pi and a local inference box to pur
 
 ## Current status
 
-**Framework committed; self-bootstrapping local setup audit is the next operation. External revenue actions remain disabled.**
+**Framework self-bootstrap and setup audit have been executed; external revenue actions remain disabled.**
 
-`CONTROL.json` is in `setup`. Pi may synchronize and validate this repository, audit documentation, test runtime and recovery behavior, perform local work, and conduct tightly bounded read-only public checks. It may not submit, publish, message, purchase, create accounts, accept terms, authenticate to newly authorized services, or otherwise mutate external data until the owner activates a bounded campaign.
+`CONTROL.json` is in `setup` with `external_actions_allowed: false`. Pi may synchronize and validate this repository, audit documentation/runtime boundaries, and commit/push setup-related records to `flipjam/autobank`. It may not submit, publish, message, purchase, create accounts, authenticate to newly authorized services, or otherwise mutate external data until the owner activates a bounded campaign.
 
-The complete next operation is defined in `SETUP_AUDIT_PROMPT.md`.
+The setup-audit command and latest completion state are in:
+
+- `SETUP_AUDIT_REPORT.md`
+- `RESUME_TEST_PLAN.md`
 
 ## One-paste setup audit
 
-The owner does not need to pull, validate, or prepare the checkout manually. Start Pi, invoke `/task-auto`, and paste the complete prompt from `SETUP_AUDIT_PROMPT.md`. That prompt requires Pi to:
+The owner does not need to pull, validate, or prepare the checkout manually. Start Pi, invoke `/task-auto`, and paste the complete prompt from `SETUP_AUDIT_PROMPT.md` if a full re-run is needed.
+
+That prompt requires Pi to:
 
 1. Safely locate and fast-forward the authorized checkout at `C:\Projects\autobank`.
-2. Preserve unexpected local work instead of resetting or discarding it.
+2. Preserve unexpected local work instead of resetting/discarding it.
 3. Run validator self-tests and strict validation.
 4. Review all tracked documentation for freshness and consistency.
 5. Audit the local inference, web-access, browser, statusline, and remote boundaries.
@@ -23,11 +28,11 @@ The owner does not need to pull, validate, or prepare the checkout manually. Sta
 7. Commit and push every intended public-safe change.
 8. Verify a clean tree and matching local/remote `main` commit.
 
-This audit is not authorization to begin revenue work.
+Current audit outcome is `READY WITH BLOCKERS` due unresolved runtime cost-boundary verification.
 
 ## Governing documents
 
-- `AUTOBANK_POLICY.md` — the 15 owner-approved operating rules
+- `AUTOBANK_POLICY.md` — the owner-approved operating rules
 - `CONTROL.json` — owner-controlled run state, emergency stop, campaign, and external-action switch
 - `MISSION.md` — ordered revenue objective and current setup mission
 - `AUTHORIZED_RESOURCES.md` — exact accounts, tools, repositories, and permission boundaries

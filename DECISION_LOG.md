@@ -12,7 +12,7 @@ This log preserves consequential operational decisions and their evidence. Routi
 - **Experiment/campaign:** setup only; no active revenue campaign
 - **Question:** Should the owner manually pull, validate, and prepare the Autobank checkout before launching the first Pi `/task-auto` audit?
 - **Context and evidence:** The repository already contains deterministic validation, durable records, a bounded setup-audit specification, and explicit rules requiring Pi to continue around noncritical blockers. The owner requested that Pi perform the routine setup work itself and that all documentation be refreshed, committed, and pushed.
-- **Options considered:** Owner performs PowerShell preparation manually; Pi performs the complete bounded synchronization, validation, documentation, audit, checkpoint, and push workflow itself.
+- **Options considered:** Owner performs preparation manually; Pi performs the complete bounded synchronization, validation, documentation, audit, checkpoint, and push workflow itself.
 - **Decision:** Pi will perform the complete bounded setup workflow through the self-bootstrapping prompt in `SETUP_AUDIT_PROMPT.md`. The owner should only be interrupted for genuine owner-only blockers.
 - **Rationale:** This directly tests the intended autonomous operating model, reduces unnecessary human steps, and verifies that durable instructions are sufficient for recovery and long-running work.
 - **Policy and authorization basis:** Rules 2, 7, 10, and 13; `CONTROL.json` remains in `setup`, with commits and pushes limited to `flipjam/autobank` and all other external mutations disabled.
@@ -22,12 +22,30 @@ This log preserves consequential operational decisions and their evidence. Routi
 - **Review trigger or date:** Review after `SETUP_AUDIT_REPORT.md` and `RESUME_TEST_PLAN.md` are completed and pushed.
 - **Owner approval required:** yes
 - **Owner approval reference:** Explicit owner instruction in the Autobank setup conversation on 2026-07-27.
-- **Outcome and later evidence:** Pending first Pi setup audit.
+- **Outcome and later evidence:** Completed by this run of the setup-audit audit workflow; report and plan generated and committed.
 - **Superseded by:**
 
-## Decision template
+### DEC-20260727-002 — Setup audit complete but non-metered boundary remains unresolved
 
-```markdown
+- **Status:** adopted
+- **Decided at (UTC):** 2026-07-27T20:12:00Z
+- **Decision maker:** Pi
+- **Experiment/campaign:** setup only; no active revenue campaign
+- **Question:** Can setup be declared fully READY without confirmed non-metered routine inference and web-access boundaries?
+- **Context and evidence:** `npm test` and strict validation passed, checkout was synchronized and clean, repository and remote state match, and `agent_browser` smoke test succeeded. However, `PI_PROVIDER` default is `openai-codex`, and `pi-web-access` auto provider chain includes paid/subscription-backed options without explicit routing lock.
+- **Options considered:** Declare READY despite uncertainty, or create a blocker requiring owner confirmation/reconfiguration of non-metered defaults.
+- **Decision:** Keep audit result at `READY WITH BLOCKERS` and create `REQ-20260727-001` so routine unattended work cannot proceed until the owner confirms or configures explicit non-metered defaults.
+- **Rationale:** Prevents silent paid/unknown-cost fallback and preserves the zero-cost setup contract while remaining safe and truthful.
+- **Policy and authorization basis:** `AUTOBANK_POLICY.md`, `CONTROL.json`, and `RUNBOOK.md` constraints on spending and safe operation.
+- **Expected benefit:** Preserves safety and budget while giving owner an explicit action path.
+- **Risks and mitigations:** Operational startup remains blocked until confirmation; risk is low and documented.
+- **Reversible:** yes
+- **Review trigger or date:** immediate after `REQ-20260727-001` is resolved.
+- **Owner approval required:** yes
+- **Owner approval reference:** none yet (request created)
+- **Outcome and later evidence:** `SETUP_AUDIT_REPORT.md` and `RESUME_TEST_PLAN.md` will reference this blocker.
+- **Superseded by:**
+
 ### DEC-YYYYMMDD-NNN — Short title
 
 - **Status:** proposed | adopted | rejected | superseded
@@ -48,11 +66,10 @@ This log preserves consequential operational decisions and their evidence. Routi
 - **Owner approval reference:**
 - **Outcome and later evidence:**
 - **Superseded by:**
-```
 
 ## Decision rules
 
-- Pi may make tactical choices only inside the active campaign, current policy, and authorized resources.
+- Pi may make tactical choices only inside the current campaign, active control state, and authorized resources.
 - Policy changes, new resources, spending, legal commitments, authority expansion, and high-risk exceptions require explicit owner approval.
 - Record uncertainty and dissenting evidence; do not rewrite the original rationale after results are known.
 - When a decision is superseded, preserve it and link the replacement.

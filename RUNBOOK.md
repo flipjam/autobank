@@ -31,7 +31,11 @@ If repository state and external reality disagree, preserve both observations, s
 
 ### Owner one-paste setup-audit entry
 
-For the current initial setup audit, the owner may start Pi, invoke `/task-auto`, and paste the complete prompt from `SETUP_AUDIT_PROMPT.md`. The prompt makes Pi perform checkout synchronization, validation, documentation review, runtime auditing, reporting, commit, push, and remote-HEAD verification itself. No manual preparation is required unless Pi records a genuine owner-only blocker.
+For the initial setup audit, the owner may start Pi and invoke `/task-auto` with the complete prompt from `SETUP_AUDIT_PROMPT.md`.
+
+The most recent completed audit is recorded in `SETUP_AUDIT_REPORT.md`.
+
+No manual preparation is required unless Pi records a genuine owner-only blocker.
 
 ## 2. Behavior by control state
 
@@ -213,6 +217,8 @@ On receiving or detecting an emergency stop, Pi must:
 
 ## 13. Current next operation
 
-The current authorized operation is the self-bootstrapping bounded setup audit in `SETUP_AUDIT_PROMPT.md`. It must synchronize the checkout safely; run deterministic tests; review all tracked documentation for freshness; verify the approved local inference, `pi-web-access`, Agent Browser, statusline, and Tailscale boundaries; produce `SETUP_AUDIT_REPORT.md` and `RESUME_TEST_PLAN.md`; commit and push every intended public-safe change; and verify local and remote `main` match.
+The most recent completed operation is the initial setup audit in `SETUP_AUDIT_PROMPT.md`.
 
-It must not activate a campaign, begin revenue work, change owner authority, or mutate external data outside the Autobank repository.
+Current next action is to resolve open owner requests in `OWNER_REQUESTS.md` (notably `REQ-20260727-001`), then re-run or resume the setup audit with updated non-metered runtime settings.
+
+A setup completion requires repository synchronization, deterministic tests, complete boundary verification, and verified local and remote `main` alignment before starting any campaign work.
