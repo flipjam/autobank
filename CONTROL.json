@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "run_state": "setup",
+  "external_actions_allowed": false,
+  "emergency_stop": false,
+  "autonomous_spending_limit_usd": 0,
+  "active_campaign_id": null,
+  "owner_directive": "Complete bounded workspace and runtime validation only. Do not begin a revenue experiment or perform any external mutation until the owner explicitly activates a campaign and commits that change.",
+  "reason": "Initial Autobank bootstrap and audit are pending.",
+  "updated_at_utc": null,
+  "updated_by": "owner_setup"
+}
