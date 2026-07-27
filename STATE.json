@@ -20,7 +20,7 @@
   },
   "last_external_action_id": null,
   "last_evidence_id": null,
-  "last_checkpoint_commit": "ea55164",
+  "last_checkpoint_commit": "894b7e2",
   "working_tree_expected_clean": true,
   "updated_at_utc": "2026-07-27",
   "updated_by": "setup_audit_pi"
