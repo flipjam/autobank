@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "workspace_status": "bootstrap_pending",
+  "workspace_status": "framework_ready_for_local_validation",
   "revenue_stage": "first_verified_dollar",
   "active_experiment_id": null,
-  "active_task": "Validate the Autobank operating framework and local Pi runtime without external mutations.",
-  "last_completed_action": "Approved operating policy and initial control documents were committed.",
-  "next_intended_action": "Run deterministic workspace validation, then perform a bounded Pi audit and recovery smoke test.",
+  "active_task": "Validate the committed Autobank framework and run the bounded first Pi setup audit without external mutations.",
+  "last_completed_action": "The operating framework, deterministic validator, validator self-tests, and bounded setup-audit prompt were committed to main.",
+  "next_intended_action": "Pull main on the Autobank machine, run npm test and npm run validate:strict, then execute SETUP_AUDIT_PROMPT.md through /task-auto.",
   "blockers": [],
   "open_owner_request_ids": [],
   "verified_financials_usd": {
@@ -20,8 +20,8 @@
   },
   "last_external_action_id": null,
   "last_evidence_id": null,
-  "last_checkpoint_commit": null,
+  "last_checkpoint_commit": "207bf6e49ebdd987e44a3b30ca6f137d7f3ca592",
   "working_tree_expected_clean": true,
   "updated_at_utc": null,
-  "updated_by": "setup"
+  "updated_by": "setup_assistant"
 }
