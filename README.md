@@ -4,23 +4,27 @@ Autobank is a controlled experiment in using Pi and a local inference box to pur
 
 ## Current status
 
-**Bootstrap and validation only. External revenue actions are disabled.**
+**Framework ready for local validation. External revenue actions are disabled.**
 
 `CONTROL.json` is currently in `setup`. Pi may validate the workspace, test recovery, perform local work, and conduct read-only public research. It may not submit, publish, message, purchase, create accounts, log into newly authorized services, or otherwise mutate external data until the owner activates a bounded campaign.
+
+The next bounded operation is defined in `SETUP_AUDIT_PROMPT.md`.
 
 ## Start here
 
 1. Read `AGENTS.md`.
 2. Read `AUTOBANK_POLICY.md` and `CONTROL.json`.
-3. Run `npm run validate`.
+3. Run the validator self-tests and strict validation.
 4. Follow `RUNBOOK.md`.
+5. Run the setup audit through Pi `/task-auto` using `SETUP_AUDIT_PROMPT.md`.
 
 On the Windows Autobank machine:
 
 ```powershell
 cd C:\Projects\autobank
 git pull --ff-only
-npm run validate
+npm test
+npm run validate:strict
 pi
 ```
 
@@ -46,9 +50,10 @@ pi
 
 ## Deterministic validation
 
-The repository has no runtime dependencies. Node.js validates required files, control invariants, financial totals, ledger structure, ignore rules, duplicate record IDs, tracked sensitive paths, and common secret patterns:
+The repository has no runtime dependencies. Node.js validates required files, control invariants, financial totals, ledger structure, ignore rules, duplicate record IDs, tracked sensitive paths, and common secret patterns. A separate self-test proves that important violations are rejected.
 
 ```powershell
+npm test
 npm run validate
 npm run validate:strict
 ```
