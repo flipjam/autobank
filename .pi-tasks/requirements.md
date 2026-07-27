@@ -1,0 +1,1 @@
+"Prove that a fresh Pi session can reconstruct Autobank’s current state entirely from the repository, identify the correct boundaries and pending production gate, safely resume setup/testing, and leave a truthful clean checkpoint." [anchor: Objective]
