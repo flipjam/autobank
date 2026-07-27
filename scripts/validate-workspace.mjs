@@ -26,8 +26,11 @@ const requiredFiles = [
   'EVIDENCE_INDEX.md',
   'LEDGER.csv',
   'RUNBOOK.md',
+  'SETUP_AUDIT_PROMPT.md',
+  'evidence/README.md',
   'package.json',
-  'scripts/validate-workspace.mjs'
+  'scripts/validate-workspace.mjs',
+  'scripts/test-validator.mjs'
 ];
 
 function relative(file) {
@@ -220,6 +223,7 @@ const expectedLedgerHeader = [
   'notes'
 ];
 
+let ledgerRows = [];
 if (fs.existsSync(path.join(root, 'LEDGER.csv'))) {
   const lines = readText('LEDGER.csv').split(/\r?\n/).filter((line) => line.length > 0);
   try {
@@ -227,12 +231,13 @@ if (fs.existsSync(path.join(root, 'LEDGER.csv'))) {
     if (header.join(',') !== expectedLedgerHeader.join(',')) {
       errors.push('LEDGER.csv header does not match the approved schema.');
     }
-    for (let index = 1; index < lines.length; index += 1) {
-      const row = parseCsvLine(lines[index]);
+    ledgerRows = lines.slice(1).map((line, index) => {
+      const row = parseCsvLine(line);
       if (row.length !== expectedLedgerHeader.length) {
-        errors.push(`LEDGER.csv row ${index + 1} has ${row.length} columns; expected ${expectedLedgerHeader.length}.`);
+        errors.push(`LEDGER.csv row ${index + 2} has ${row.length} columns; expected ${expectedLedgerHeader.length}.`);
       }
-    }
+      return row;
+    });
   } catch (error) {
     errors.push(`LEDGER.csv could not be parsed: ${error.message}`);
   }
@@ -322,25 +327,38 @@ if (gitResult.status !== 0) {
       }
     }
   }
+}
 
-  const idPattern = /\b(?:REQ|OPP|EXP|ACT|EVD|DEC|FIN)-\d{8}-\d{3}\b/g;
-  const idOwners = new Map();
-  for (const file of trackedFiles.filter((item) => item.endsWith('.md') || item.endsWith('.csv') || item.endsWith('.json'))) {
-    const absolute = path.join(root, file);
-    let text;
-    try {
-      text = fs.readFileSync(absolute, 'utf8');
-    } catch {
-      continue;
+const definitionSources = [
+  ['OWNER_REQUESTS.md', 'REQ'],
+  ['OPPORTUNITIES.md', 'OPP'],
+  ['EXPERIMENT_LOG.md', 'EXP'],
+  ['EXTERNAL_ACTIONS.md', 'ACT'],
+  ['EVIDENCE_INDEX.md', 'EVD'],
+  ['DECISION_LOG.md', 'DEC']
+];
+const definedIds = new Map();
+for (const [file, prefix] of definitionSources) {
+  if (!fs.existsSync(path.join(root, file))) continue;
+  const pattern = new RegExp(`^###\\s+(${prefix}-\\d{8}-\\d{3})\\b`, 'gm');
+  for (const match of readText(file).matchAll(pattern)) {
+    const id = match[1];
+    if (definedIds.has(id)) {
+      errors.push(`Duplicate record definition ${id} appears in both ${definedIds.get(id)} and ${file}.`);
+    } else {
+      definedIds.set(id, file);
     }
-    for (const id of text.match(idPattern) ?? []) {
-      const previous = idOwners.get(id);
-      if (previous && previous !== file) {
-        errors.push(`Duplicate record ID ${id} appears in both ${previous} and ${file}.`);
-      } else {
-        idOwners.set(id, file);
-      }
-    }
+  }
+}
+
+for (const row of ledgerRows) {
+  const id = row[0];
+  if (!/^FIN-\d{8}-\d{3}$/.test(id)) {
+    errors.push(`Ledger entry ID is invalid: ${id || '<empty>'}`);
+  } else if (definedIds.has(id)) {
+    errors.push(`Duplicate record definition ${id} appears in both ${definedIds.get(id)} and LEDGER.csv.`);
+  } else {
+    definedIds.set(id, 'LEDGER.csv');
   }
 }
 
