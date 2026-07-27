@@ -2,7 +2,7 @@
 
 ## Executive result
 
-**Status:** READY FOR SETUP/TESTING WITH DEFERRED PRODUCTION-GATE
+**Status:** READY FOR SETUP/TESTING WITH DEFERRED PRODUCTION-GATE (latest setup/testing checkpoint run blocked by `origin/main` mismatch)
 
 **Overall scope:** Initial `/task-auto` setup audit and runtime boundary verification for `setup` control state.
 
@@ -18,13 +18,16 @@
 
 ## Repository synchronization and state
 
-- Working directory confirmed: `C:\Projects\autobank`
+- Worktree: `C:\Projects\autobank`
 - Git checkout target: `https://github.com/flipjam/autobank.git`
 - Branch: `main`
-- Local HEAD: `26f5a92`
-- Remote HEAD (`origin/main`): `26f5a92`
-- Working tree before/after edits: clean at checkpoints (verified with `git status --short --branch`)
+- Upstream: `origin/main`
+- Local HEAD: `e07596d18e85901c5a580201ce8de4839b1b76d7`
+- `origin/main` HEAD: `88e726dc912da84594ca2a88245968e8e6928863`
+- `ahead/behind` to `origin/main`: `1/0` (local only divergence)
+- Working tree at report time: modified (`.pi-tasks/TASK_AUTO_0001.md`, `.pi-tasks/TASK_0001.md`, `STATE.json`)
 - Fast-forward synchronization policy was followed (no force-push/rebase/clean/restore used)
+- **Fast-forward completion is required for non-blocked completion; current state remains blocked by divergence.**
 
 ## Checks and outcomes
 
@@ -39,7 +42,7 @@
 | Web-access boundary | `~/.pi/web-search.json` + `pi-web-access` code-path review | **UNCERTAIN / BLOCKER** |
 | Agent Browser smoke | `agent_browser` open `https://example.com`, `snapshot -i` | PASS |
 | Statusline + remote visibility | package/command registration evidence and config inspection | PASS |
-| Final checkpoint behavior | report/plan prepared, changes staged for commit | PASS |
+| Final checkpoint behavior | report/plan prepared, `origin/main` sync mismatch captured | PASS (completion blocked) |
 
 ## Documentation-freshness audit
 
@@ -129,11 +132,13 @@ No owner-facing remote service was started during this audit.
    - `RESUME_TEST_PLAN.md`
 2. Updated operational records to keep the repository state truthful.
 3. Removed a spurious empty path artifact outside tracked workspace naming.
+4. Added `RESUME_TEST_REPORT.md` with repository/state and validation outcomes for this blocked run.
 
 ### Open blockers / owner-only items
 
 - **`REQ-20260727-001`**: answered for temporary web-search calibration and setup-phase model-use authorization; inference-lock requirement remains deferred.
 - **`REQ-20260727-002`**: kept as a production-readiness gate (local minipc default + no silent metered fallback) and is non-blocking for current setup/testing.
+- **Sync state:** local branch is currently `ahead/behind 1/0` vs `origin/main`; completion remains blocked until `0/0` fast-forward equality is reached.
 
 ## Evidence references
 

@@ -1,5 +1,15 @@
 # Resume Test Plan
 
+## Latest execution record
+
+Execution timestamp (UTC): 2026-07-27T23:57:27Z
+
+Result/status: **BLOCKED**
+
+Outcome: bounded setup/testing validation completed locally; `origin/main` is not fast-forward-equal (`ahead/behind: 1/0`), so completion is deferred.
+
+Reference: `RESUME_TEST_REPORT.md`
+
 ## Objective
 
 Validate that Pi can be stopped/restarted and safely reconstruct the remaining setup state from repository records without losing truth or violating control limits.
@@ -9,6 +19,7 @@ Validate that Pi can be stopped/restarted and safely reconstruct the remaining s
 - `CONTROL.json` remains in `setup`
 - `external_actions_allowed` remains `false`
 - Working tree is clean after checkpoint
+  - Note for this execution: `.pi-tasks/TASK_AUTO_0001.md` and `.pi-tasks/TASK_0001.md` were present as pre-existing/working changes, so completion was not finalized.
 - Network access is available for read-only docs/repo operations
 - No active revenue campaign
 
@@ -75,6 +86,11 @@ Use this plan after a restart event, transient failure, or owner-requested revie
 
 - **Pass:** `SETUP_AUDIT_REPORT.md` and `STATE.json` align with current `git status`, validation outputs, and blocker state.
 - **Fail:** Missing required records, divergence from `origin/main`, validation failure, or unresolved open owner request that blocks safe continuation.
+
+## Completion/finalization rule
+
+- If `git rev-list --left-right --count HEAD...origin/main` returns `0 0` and tree is clean, completion may be finalized.
+- Otherwise (including `1 0`/`0 1` or clean-tree failure), report as blocked and do not assert completion/push posture.
 
 ## Duplicate-action safeguards
 

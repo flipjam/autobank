@@ -7,7 +7,9 @@
   "last_completed_action": "Applied owner clarification that faster subscription-backed models are authorized for setup/testing work and recorded this as a non-blocking deferral to production readiness gates.",
   "next_intended_action": "Complete remaining setup/testing tasks and deterministic checks in SETUP_AUDIT_PROMPT.md sequence; verify production inference local-only enforcement before any campaign-bound operation.",
   "blockers": [],
-  "open_owner_request_ids": [],
+  "open_owner_request_ids": [
+    "REQ-20260727-002"
+  ],
   "verified_financials_usd": {
     "gross_revenue": 0,
     "platform_fees": 0,
