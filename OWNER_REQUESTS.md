@@ -4,6 +4,8 @@ This file is the durable queue for actions, information, permissions, accounts, 
 
 ## Open requests
 
+(Some entries may remain open as production-readiness gates while setup/testing remains authorized to continue.)
+
 ### REQ-20260727-002 — Enforce routine inference to local minipc only
 
 - **Status:** open
@@ -17,9 +19,9 @@ This file is the durable queue for actions, information, permissions, accounts, 
 - **Exact owner action needed:**
   Update local Pi runtime settings so local inference is the default for unattended work and verify with a deterministic proof (for example a local-only inference smoke test at startup).
 - **Why it is required:**
-  The setup currently requires explicit proof that routine inference is non-metered before campaign-risk operations.
+  The setup currently requires explicit proof that routine unattended inference is non-metered before campaign-risk operations.
 - **What becomes possible after completion:**
-  Routine setup and campaign work can proceed without metered surprise inference costs.
+  Campaign work can proceed without metered surprise inference costs.
 - **Minimum permission or information required:**
   Owner access to local Pi runtime defaults and routing policy.
 - **Cost:** $0
@@ -27,12 +29,14 @@ This file is the durable queue for actions, information, permissions, accounts, 
   Misconfiguration can trigger unintended metered inference fallback.
 - **Free or lower-risk alternatives attempted:**
   Local inference endpoint was tested explicitly (`minipc`) and works in a direct command call, but default unattended routing remains owner-controlled.
-- **Can productive work continue while waiting:** yes
+- **Can productive work continue while waiting:**
+  Yes, for bounded setup/testing under the current owner authorization; no for campaign-bound autonomous production until verified locally.
 - **Deadline or opportunity expiration:** none
 - **Notification method used:** local report and repository state files
 - **Owner response:**
+  Explicit clarification provided in this turn: during bounded setup, testing, debugging, and documentation phases, the owner authorizes use of faster subscription-backed models (including Codex) under Rule 7 constraints. This request is preserved as a **production-readiness gate** and is therefore non-blocking for current setup/testing.
 - **Resolution evidence:**
-  Not yet available.
+  Not yet available for production mode; verification of local default/no fallback is required before campaign activation.
 - **Closed at (UTC):** 
 
 ### REQ-20260727-001 — Validate and lock non-metered runtime inference + web-access
@@ -67,8 +71,10 @@ This file is the durable queue for actions, information, permissions, accounts, 
   - use existing Codex subscription auth only
   - no fallback to other providers
   - no API key configuration
+
+  Additional setup-phase authorization was provided in this turn: bounded setup/testing may use subscription-backed models without changing the active default provider, while production-readiness still requires routine local enforcement.
 - **Resolution evidence:**
-  EVD-20260727-004, `WEB_ACCESS_CALIBRATION_LOG.md`.
+  EVD-20260727-004, `WEB_ACCESS_CALIBRATION_LOG.md`, and this owner authorization update.
 - **Closed at (UTC):** 2026-07-27T23:17:35Z
 
 ## Request template

@@ -47,7 +47,7 @@ Allowed:
 - Deterministic tests
 - Documentation-freshness review and operator-document corrections
 - Runtime and recovery testing
-- Read-only public web research only via explicit documented owner authorization; current setup has temporary openai calibration authorization while full local-inference lock is pending.
+- Read-only public web research only via explicit documented owner authorization (current setup has temporary OpenAI calibration authorization, with usage logging and limits).
 - Agent Browser smoke tests without authentication or external mutation
 - Drafting proposed experiments and owner requests
 - Commits and pushes to the authorized Autobank repository
@@ -219,6 +219,6 @@ On receiving or detecting an emergency stop, Pi must:
 
 The most recent completed operation is the initial setup audit in `SETUP_AUDIT_PROMPT.md`.
 
-Current next action is to complete the temporary web-access calibration bookkeeping if continuing, then resolve `REQ-20260727-002` by locking routine inference to local `minipc` defaults before campaign-bound work can resume.
+Current next action is to continue bounded setup/testing work under the above authorization, then resolve `REQ-20260727-002` before campaign-bound production work by confirming routine inference lock to local `minipc` defaults.
 
 A setup completion requires repository synchronization, deterministic tests, complete boundary verification, and verified local and remote `main` alignment before starting any campaign work.

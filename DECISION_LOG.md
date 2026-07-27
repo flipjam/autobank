@@ -23,7 +23,7 @@ This log preserves consequential operational decisions and their evidence. Routi
 - **Owner approval required:** yes
 - **Owner approval reference:** Explicit owner instruction in the Autobank setup conversation on 2026-07-27.
 - **Outcome and later evidence:** Completed by this run of the setup-audit audit workflow; report and plan generated and committed.
-- **Superseded by:**
+- **Superseded by:** DEC-20260727-004
 
 ### DEC-20260727-002 — Setup audit complete but non-metered boundary remains unresolved
 
@@ -44,7 +44,7 @@ This log preserves consequential operational decisions and their evidence. Routi
 - **Owner approval required:** yes
 - **Owner approval reference:** none yet (request created)
 - **Outcome and later evidence:** `SETUP_AUDIT_REPORT.md` and `RESUME_TEST_PLAN.md` will reference this blocker.
-- **Superseded by:**
+- **Superseded by:** DEC-20260727-004
 
 ### DEC-20260727-003 — Temporary owner-authorized web search calibration for setup
 
@@ -65,6 +65,27 @@ This log preserves consequential operational decisions and their evidence. Routi
 - **Owner approval required:** yes
 - **Owner approval reference:** temporary calibration decision.
 - **Outcome and later evidence:** `OWNER_REQUESTS.md` updated (web-access temp authorization recorded), `WEB_ACCESS_CALIBRATION_LOG.md`, and `EVD-20260727-004`.
+- **Superseded by:** DEC-20260727-004
+
+### DEC-20260727-004 — Setup testing may use subscription-backed models; production routine inference gate deferred
+
+- **Status:** adopted
+- **Decided at (UTC):** 2026-07-27T23:17:35Z
+- **Decision maker:** owner
+- **Experiment/campaign:** setup only; no active revenue campaign
+- **Question:** Can bounded setup/testing, debugging, and architecture work continue when subscription-backed models are explicitly authorized while routine local-only inference remains the production requirement?
+- **Context and evidence:** Owner confirmed bounded setup phase authorization for faster models during setup/testing. A temporary OpenAI web-search calibration was already logged and constrained. Routine unattended local inference lock remains required before campaign.
+- **Options considered:** Halt all setup/testing pending local-only enforcement versus continue setup/testing with explicit production-gate deferral.
+- **Decision:** Continue bounded setup/testing under this authorization; do not treat `openai-codex` default as a setup blocker; keep production readiness request open.
+- **Rationale:** Maintains autonomy progress and documentation freshness without compromising campaign safety controls.
+- **Policy and authorization basis:** `AUTOBANK_POLICY.md` Rule 7 and explicit owner authorization.
+- **Expected benefit:** Avoids unnecessary setup stalling while preserving a documented production gate.
+- **Risks and mitigations:** Unintended drift into paid routine paths; mitigated by one active model request rule and setup-only scope.
+- **Reversible:** yes
+- **Review trigger or date:** before first campaign-bound operation or any production runtime transition.
+- **Owner approval required:** yes
+- **Owner approval reference:** explicit setup-phase model-use authorization in this turn.
+- **Outcome and later evidence:** `OWNER_REQUESTS.md`, `STATE.json`, `SETUP_AUDIT_REPORT.md`.
 - **Superseded by:**
 
 ### DEC-YYYYMMDD-NNN — Short title

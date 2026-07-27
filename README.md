@@ -29,7 +29,7 @@ That prompt requires Pi to:
 7. Commit and push every intended public-safe change.
 8. Verify a clean tree and matching local/remote `main` commit.
 
-Current audit outcome is `READY WITH BLOCKERS` with temporary web-search calibration authorized and routine inference lock still unresolved.
+Current setup/testing readiness is `READY FOR SETUP/TESTING WITH DEFERRED PRODUCTION-INFERENCE GATE`; temporary web-search calibration remains authorized while production local-only inference enforcement remains pending.
 
 ## Governing documents
 

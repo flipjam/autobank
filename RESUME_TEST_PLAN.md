@@ -67,8 +67,9 @@ Use this plan after a restart event, transient failure, or owner-requested revie
 
 ### 5) Continue only if safe
 
-- If `REQ-20260727-002` remains open, stop at safe setup boundary and notify owner.
-- If no blockers and routine inference defaults are explicitly verified non-metered, continue with remaining setup tasks in `SETUP_AUDIT_PROMPT.md`. If only temporary web-search calibration remains constrained, continue only within its documented cap and logging constraints.
+- If `REQ-20260727-002` remains open as a production-readiness gate, continue setup/testing work only; do not begin campaign-bound operations.
+- If no blockers for setup/testing remain and documentation/tests stay truthful, continue with remaining setup tasks in `SETUP_AUDIT_PROMPT.md`.
+- If only temporary web-search calibration remains constrained, continue only within its documented cap and logging constraints.
 
 ## Pass/fail criteria
 

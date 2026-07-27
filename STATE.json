@@ -1,17 +1,13 @@
 {
   "schema_version": 1,
-  "workspace_status": "framework_ready_with_inference_lock_blocker",
+  "workspace_status": "framework_ready_for_setup_testing_with_deferred_inference_gate",
   "revenue_stage": "first_verified_dollar",
   "active_experiment_id": null,
-  "active_task": "Apply the temporary web-access calibration authorization and continue setup runtime verification while routine inference lock remains pending.",
-  "last_completed_action": "Processed the owner temporary calibration authorization for pi-web-access, ran one explicit openai/web-search calibration call under workflow none with no fallback, and recorded usage metadata.",
-  "next_intended_action": "Complete the remaining calibration web-search sequence (up to 25 successful calls) if needed, then obtain explicit owner confirmation for non-metered local inference defaults and resume setup runtime checks.",
-  "blockers": [
-    "REQ-20260727-002"
-  ],
-  "open_owner_request_ids": [
-    "REQ-20260727-002"
-  ],
+  "active_task": "Continue bounded setup, testing, documentation refresh, and checkpointing under explicit owner Rule-7 authorization while routine inference lock remains a production-readiness gate.",
+  "last_completed_action": "Applied owner clarification that faster subscription-backed models are authorized for setup/testing work and recorded this as a non-blocking deferral to production readiness gates.",
+  "next_intended_action": "Complete remaining setup/testing tasks and deterministic checks in SETUP_AUDIT_PROMPT.md sequence; verify production inference local-only enforcement before any campaign-bound operation.",
+  "blockers": [],
+  "open_owner_request_ids": [],
   "verified_financials_usd": {
     "gross_revenue": 0,
     "platform_fees": 0,
@@ -24,7 +20,7 @@
   },
   "last_external_action_id": null,
   "last_evidence_id": null,
-  "last_checkpoint_commit": "6b43d2b",
+  "last_checkpoint_commit": "ea55164",
   "working_tree_expected_clean": true,
   "updated_at_utc": "2026-07-27",
   "updated_by": "setup_audit_pi"

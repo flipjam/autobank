@@ -2,7 +2,7 @@
 
 ## Executive result
 
-**Status:** READY WITH BLOCKERS
+**Status:** READY FOR SETUP/TESTING WITH DEFERRED PRODUCTION-GATE
 
 **Overall scope:** Initial `/task-auto` setup audit and runtime boundary verification for `setup` control state.
 
@@ -21,8 +21,8 @@
 - Working directory confirmed: `C:\Projects\autobank`
 - Git checkout target: `https://github.com/flipjam/autobank.git`
 - Branch: `main`
-- Local HEAD: `f3f200088cf5f361b4d9c47df2c680910a287621`
-- Remote HEAD (`origin/main`): `f3f200088cf5f361b4d9c47df2c680910a287621`
+- Local HEAD: `6222f0f`
+- Remote HEAD (`origin/main`): `6222f0f`
 - Working tree before/after edits: clean at checkpoints (verified with `git status --short --branch`)
 - Fast-forward synchronization policy was followed (no force-push/rebase/clean/restore used)
 
@@ -35,7 +35,7 @@
 | Strict validator | `npm run validate:strict` | PASS |
 | Document/operator refresh | README, RUNBOOK reviewed/updated; required files reviewed | PASS |
 | Inference availability | `pi --list-models` + local call with explicit `--provider minipc` | PARTIAL (uncertain default) |
-| Inference boundary lock | `PI_PROVIDER=...` and environment inspection | **UNCERTAIN / BLOCKER** |
+| Inference boundary lock | `PI_PROVIDER=...` and environment inspection | **DEFERRED (setup/testing allowed; production gate unresolved)** |
 | Web-access boundary | `~/.pi/web-search.json` + `pi-web-access` code-path review | **UNCERTAIN / BLOCKER** |
 | Agent Browser smoke | `agent_browser` open `https://example.com`, `snapshot -i` | PASS |
 | Statusline + remote visibility | package/command registration evidence and config inspection | PASS |
@@ -66,8 +66,8 @@ Reviewed all tracked Markdown documents plus required JSON/script/CSV controls:
 
 ### Operator-maintained updates made
 
-- Updated `README.md` to reflect completed setup audit and current blocked readiness state.
-- Updated `RUNBOOK.md` next-operation text to reflect blocker-driven next action.
+- Updated `README.md` to reflect completed setup audit and current deferred production-gate readiness state.
+- Updated `RUNBOOK.md` and `RESUME_TEST_PLAN.md` next steps to reflect deferred production-gate handling.
 - Added/updated durable operational records:
   - `OWNER_REQUESTS.md`
   - `STATE.json`
@@ -98,7 +98,8 @@ Reviewed all tracked Markdown documents plus required JSON/script/CSV controls:
 - Local inference is reachable via explicit call:
   - `pi --provider minipc --model qwen3.6-35b-a3b-xl --print "Reply with exactly: INFERENCE_LOCAL_OK"`
   - output: `INFERENCE_LOCAL_OK`
-- Because defaults still point to Codex and no repository-owned runtime policy was changed in this audit, the routine unattended path is **not yet proven to be locked to non-metered/local-only behavior**.
+- Owner authorization now allows bounded subscription-backed setup/testing usage for this phase under Rule 7. During setup/testing, the presence of `PI_PROVIDER=openai-codex` is not a blocker.
+- The production/production-readiness path is still unresolved: routine unattended inference lock to local `minipc` with no metered fallback is deferred to pre-campaign verification.
 
 ### `pi-web-access` boundary
 
@@ -130,8 +131,8 @@ No owner-facing remote service was started during this audit.
 
 ### Open blockers / owner-only items
 
-- **`REQ-20260727-001`**: treated as answered for temporary web-search calibration only; see post-decision update.
-- **`REQ-20260727-002`**: pending verification and lock for unattended inference to default local `minipc` with no metered fallback.
+- **`REQ-20260727-001`**: answered for temporary web-search calibration and setup-phase model-use authorization; inference-lock requirement remains deferred.
+- **`REQ-20260727-002`**: kept as a production-readiness gate (local minipc default + no silent metered fallback) and is non-blocking for current setup/testing.
 
 ## Evidence references
 
@@ -153,8 +154,10 @@ Owner authorized a temporary web-access calibration for startup auditing under e
 
 `REQ-20260727-001` is treated as answered for this temporary calibration authorization only.
 
-`REQ-20260727-002` remains open for routine inference lock verification.
+`REQ-20260727-002` remains open as a production-readiness gate; it no longer blocks bounded setup/testing work.
 
 ## Recommended next step
 
-Resolve `REQ-20260727-002` by proving routine unattended inference remains on local `minipc` defaults without automatic metered fallback; then re-run setup runtime checks from a clean tree and re-verify local/remote commit alignment.
+Continue setup/testing sequence tasks under current authorization; maintain one active model request and record meaningful usage metadata when using subscription-backed models.
+
+Before any campaign-bound production work, resolve `REQ-20260727-002` by proving routine unattended inference remains on local `minipc` defaults without automatic metered fallback and update production-readiness records accordingly.
