@@ -4,8 +4,8 @@
   "revenue_stage": "first_verified_dollar",
   "active_experiment_id": null,
   "active_task": "Run the self-bootstrapping bounded Pi setup, documentation, and runtime audit without revenue work or external mutations outside this repository.",
-  "last_completed_action": "The setup-audit prompt, README, and runbook were refreshed so Pi can synchronize, validate, audit documentation and runtime, report, commit, push, and verify remote state without manual preparation.",
-  "next_intended_action": "Start Pi, invoke /task-auto, and paste the complete prompt from SETUP_AUDIT_PROMPT.md; Pi must perform all checkout, test, documentation, audit, checkpoint, and push steps itself.",
+  "last_completed_action": "The setup-audit prompt and current operating documentation were refreshed, the owner decision for Pi to perform its own preparation was recorded, and all intended setup changes were committed to main.",
+  "next_intended_action": "Start Pi, invoke /task-auto, and paste the complete prompt from SETUP_AUDIT_PROMPT.md; Pi must perform all checkout, test, documentation, audit, checkpoint, push, and remote-verification steps itself.",
   "blockers": [],
   "open_owner_request_ids": [],
   "verified_financials_usd": {
@@ -20,7 +20,7 @@
   },
   "last_external_action_id": null,
   "last_evidence_id": null,
-  "last_checkpoint_commit": "f0d1f5d42f922cb5122a5546d78cbac9875369ce",
+  "last_checkpoint_commit": "6b529a358ae39e51909185ab96751ce7d4a654fa",
   "working_tree_expected_clean": true,
   "updated_at_utc": "2026-07-27",
   "updated_by": "setup_assistant"
