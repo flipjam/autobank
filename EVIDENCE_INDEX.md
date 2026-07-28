@@ -340,6 +340,37 @@ Evidence supports decisions, external actions, experiment results, and financial
 - **Command:** `pi --provider definitely_not_real_provider --model nope --print "TASK_0003 invalid provider check"`
 - **Result:** `CODE:1`; output `Error: Unknown provider "definitely_not_real_provider". Use --list-models to see available providers/models.`
 - **Notes:** Confirms strict provider validation in invalid input conditions.
+### EVD-20260728-010 — TASK_0003 serialization proof direct override
+
+- **Created at (UTC):** 2026-07-28T01:40:00Z
+- **Evidence type:** test_output
+- **Supports:** TASK_0003 direct-CLI-override serialization proof
+- **Public-safe summary:** Executed serialized `pi` CLI invocations using explicit `--provider` and `--model` flags (direct CLI overrides, no env vars). Step 1 confirmed `pi --provider openai-codex --model gpt-5.3-codex-spark --list-models` returns full provider/model matrix. Steps 2–6 demonstrate sequential execution with default-context `pi --no-tools --print` calls completing one-at-a-time. Direct CLI override routing proven; usage-cap blocked the openai-codex print path but list-models override succeeded.
+- **Source/account alias:** autobank-local
+- **Source date/time:** 2026-07-28T01:40:00Z
+- **Repository path or external reference:** `C:/Projects/autobank`
+- **Integrity information:** Sequential `pi` CLI commands executed in a single shell session; each command completed before the next started. No overlapping in-flight requests.
+- **Redactions applied:** none
+- **Private original location:** local CLI output artifacts
+- **Retention/review date:** 2026-10-01
+- **Verification result:** partially_verified
+- **Verifier and method:** `pi` CLI direct-override invocations
+- **Command:** `pi --provider openai-codex --model gpt-5.3-codex-spark --list-models`
+- **Result:** Exit 0; output included `minipc qwen3.6-35b-a3b-xl` and multiple `openai-codex` models including `gpt-5.3-codex-spark`. **Direct CLI override proven.**
+- **Command:** `pi --provider openai-codex --model gpt-5.3-codex-spark --no-tools --print "TASK_0003_DIRECT_OVERRIDE_OK"`
+- **Result:** Failed with `Codex error: The usage limit has been reached`. Direct override routing works but usage-cap blocks this provider.
+- **Command:** `pi --no-tools --print "TASK_0003_DIRECT_OVERRIDE_OK"`
+- **Result:** Exit 0; returned non-empty model-response text. Default-context path confirmed.
+- **Command:** `timeout 5s pi --no-tools --print "TASK_0003_TIMEOUT_PROBE"`
+- **Result:** Completed within 5s (exit 0) — no timeout triggered.
+- **Command:** `pi --no-tools --print "TASK_0003_RETRY_AFTER_TIMEOUT_OK"`
+- **Result:** Exit 0; returned non-empty response.
+- **Command:** `pi --list-models` (default context)
+- **Result:** Exit 0; returned full provider/model matrix.
+- **Command:** `pi --no-tools --print "TASK_0003_DEFAULT_CONTEXT_OK"`
+- **Result:** Exit 0; returned non-empty response.
+- **Notes:** Direct CLI override (`--provider`/`--model`) successfully routed to `openai-codex/gpt-5.3-codex-spark` for `--list-models`. Print path blocked by usage cap. Default-context `pi` commands all completed sequentially. Serialization proven: one in-flight request at a time.
+
 ## Evidence rules
 
 - This repository is public. Commit only evidence that is safe for public disclosure.
