@@ -172,9 +172,9 @@ A1: yes—perform a dedicated preflight durable-record reconciliation pass first
 
 - [x] TASK_0001  Change to `C:\Projects\autobank` and run this only as bounded setup/testing work.
 - [x] TASK_0002  Use the authorized faster subscription-backed model for this bounded test.
-- [x] TASK_0003  Use one active model request at a time.
-- [ ] TASK_0003  Perform the entire test yourself and do not ask the owner to run routine Git, validation, documentation, or checkpoint commands.
-- [ ] Prohibit campaign/revenue/external side effects beyond commits and pushes to flipjam/autobank.
+- [x] TASK_0003  Use one active model request at a time (serialization proof via direct CLI overrides completed).
+- [x] TASK_0003  Perform the entire test yourself and do not ask the owner to run routine Git, validation, documentation, or checkpoint commands.
+- [x] Prohibit campaign/revenue/external side effects beyond commits and pushes to flipjam/autobank.
 - [ ] Inspect before changing anything: repository identity, current branch/upstream, remotes, local HEAD, origin/main HEAD, working-tree status, and ahead/behind count.
 - [ ] Preserve unexpected local work; do not reset/clean/stash/rebase/force-push/restore/discard/overwrite just to get a clean tree.
 - [ ] Fetch and synchronize using fast-forward-only behavior without rewriting history.

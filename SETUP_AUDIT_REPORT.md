@@ -2,7 +2,7 @@
 
 ## Executive result
 
-**Status:** READY FOR SETUP/TESTING WITH DEFERRED PRODUCTION-GATE (latest setup/testing checkpoint run blocked by `origin/main` mismatch)
+**Status:** READY FOR SETUP/TESTING WITH DEFERRED PRODUCTION-GATE (repository synchronized and clean)
 
 **Overall scope:** Initial `/task-auto` setup audit and runtime boundary verification for `setup` control state.
 
@@ -22,12 +22,12 @@
 - Git checkout target: `https://github.com/flipjam/autobank.git`
 - Branch: `main`
 - Upstream: `origin/main`
-- Local HEAD: `e07596d18e85901c5a580201ce8de4839b1b76d7`
-- `origin/main` HEAD: `88e726dc912da84594ca2a88245968e8e6928863`
-- `ahead/behind` to `origin/main`: `1/0` (local only divergence)
-- Working tree at report time: modified (`.pi-tasks/TASK_AUTO_0001.md`, `.pi-tasks/TASK_0001.md`, `STATE.json`)
+- Local HEAD: `9e905f1e08e04cfe17fab229aad3a6e62aa9569c` (TASK_0003 serialization proof committed)
+- `origin/main` HEAD: `9e905f1e08e04cfe17fab229aad3a6e62aa9569c`
+- `ahead/behind` to `origin/main`: `0/0` (synchronized)
+- Working tree at report time: clean
 - Fast-forward synchronization policy was followed (no force-push/rebase/clean/restore used)
-- **Fast-forward completion is required for non-blocked completion; current state remains blocked by divergence.**
+- **Repository is now synchronized and clean.**
 
 ## Checks and outcomes
 
@@ -37,12 +37,12 @@
 | Deterministic validator | `npm test` | PASS |
 | Strict validator | `npm run validate:strict` | PASS |
 | Document/operator refresh | README, RUNBOOK reviewed/updated; required files reviewed | PASS |
-| Inference availability | `pi --list-models` + local call with explicit `--provider minipc` | PARTIAL (uncertain default) |
+| Inference availability | `pi --list-models` + local call with explicit `--provider minipc` | PARTIAL (minipc reachable via explicit override; default inferred) |
 | Inference boundary lock | `PI_PROVIDER=...` and environment inspection | **DEFERRED (setup/testing allowed; production gate unresolved)** |
-| Web-access boundary | `~/.pi/web-search.json` + `pi-web-access` code-path review | **UNCERTAIN / BLOCKER** |
+| Web-access boundary | `~/.pi/web-search.json` + `pi-web-access` code-path review | **TEMPORARY CALIBRATION COMPLETED (1 of 25 calls used)** |
 | Agent Browser smoke | `agent_browser` open `https://example.com`, `snapshot -i` | PASS |
 | Statusline + remote visibility | package/command registration evidence and config inspection | PASS |
-| Final checkpoint behavior | report/plan prepared, `origin/main` sync mismatch captured | PASS (completion blocked) |
+| Final checkpoint behavior | report/plan prepared, `origin/main` sync verified | PASS (synchronized) |
 
 ## Documentation-freshness audit
 
@@ -109,8 +109,9 @@ Reviewed all tracked Markdown documents plus required JSON/script/CSV controls:
 
 - `~/.pi/web-search.json` has no explicit provider routing fields beyond legacy shortcuts.
 - `pi-web-access` auto chain includes `openai` fallback before MCP alternatives.
-- No paid/metered-safe classification was possible without explicit owner-approved config changes.
-- Initial report period had no web-search nor fetch-content calls executed before this calibration decision; afterward, one explicit temporary openai call was logged under controlled calibration conditions.
+- Temporary calibration completed: one explicit `provider: "openai"`, `workflow: "none"` call succeeded (EVD-20260727-004).
+- Hard cap: 25 successful explicit openai calls; current usage: 1.
+- No API key configured; uses Codex subscription auth.
 
 ## Agent Browser, statusline, and Tailscale checks
 
@@ -138,7 +139,7 @@ No owner-facing remote service was started during this audit.
 
 - **`REQ-20260727-001`**: answered for temporary web-search calibration and setup-phase model-use authorization; inference-lock requirement remains deferred.
 - **`REQ-20260727-002`**: kept as a production-readiness gate (local minipc default + no silent metered fallback) and is non-blocking for current setup/testing.
-- **Sync state:** local branch is currently `ahead/behind 1/0` vs `origin/main`; completion remains blocked until `0/0` fast-forward equality is reached.
+- **Sync state:** resolved — local branch and `origin/main` are synchronized (`0/0` ahead/behind).
 
 ## Evidence references
 
@@ -164,6 +165,6 @@ Owner authorized a temporary web-access calibration for startup auditing under e
 
 ## Recommended next step
 
-Continue setup/testing sequence tasks under current authorization; maintain one active model request and record meaningful usage metadata when using subscription-backed models.
+Execute the resume test per `RESUME_TEST_PLAN.md` to prove Pi can reconstruct state from the repository. After that, begin opportunity research for the first-dollar strategy.
 
 Before any campaign-bound production work, resolve `REQ-20260727-002` by proving routine unattended inference remains on local `minipc` defaults without automatic metered fallback and update production-readiness records accordingly.
