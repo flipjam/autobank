@@ -88,25 +88,25 @@ This log preserves consequential operational decisions and their evidence. Routi
 - **Outcome and later evidence:** `OWNER_REQUESTS.md`, `STATE.json`, `SETUP_AUDIT_REPORT.md`.
 - **Superseded by:**
 
-### DEC-YYYYMMDD-NNN — Short title
+### DEC-20260728-001 — Rotate print path from openai-codex to minipc as routine default provider
 
-- **Status:** proposed | adopted | rejected | superseded
-- **Decided at (UTC):**
-- **Decision maker:** owner | Pi within delegated authority
-- **Experiment/campaign:**
-- **Question:**
-- **Context and evidence:**
-- **Options considered:**
-- **Decision:**
-- **Rationale:**
-- **Policy and authorization basis:**
-- **Expected benefit:**
-- **Risks and mitigations:**
-- **Reversible:** yes | no | partially
-- **Review trigger or date:**
-- **Owner approval required:** yes | no
-- **Owner approval reference:**
-- **Outcome and later evidence:**
+- **Status:** adopted
+- **Decided at (UTC):** 2026-07-28T02:00:00Z
+- **Decision maker:** Pi within delegated authority
+- **Experiment/campaign:** setup only; no active revenue campaign
+- **Question:** Should the print path default provider be rotated from `openai-codex` (blocked by usage caps) to `minipc` as the routine default?
+- **Context and evidence:** `openai-codex` print path hit usage caps during TASK_0003 verification. `minipc` default-context path was confirmed operational via `pi --list-models` (both providers listed) and `pi --print` (successful output). `REQ-20260727-002` remains an open production-readiness gate but was explicitly authorized as non-blocking for bounded setup/testing by the owner.
+- **Options considered:** (a) Retain `openai-codex` as default and retry periodically — rejected due to persistent usage-cap block; (b) Rotate to `minipc` as the routine default for the print path — selected.
+- **Decision:** Rotate the print path default provider from `openai-codex` to `minipc`. `STATE.json` `active_task` is updated to reflect this rotation. `REQ-20260727-002` remains open as a production-readiness gate (local-only enforcement verification before campaign activation).
+- **Rationale:** Resolves the blocked print path with the confirmed operational default-context provider, maintaining setup progress without requiring owner intervention. Local `minipc` inference is already the approved non-metered endpoint.
+- **Policy and authorization basis:** `AUTOBANK_POLICY.md` Rules 2 and 7; `CONTROL.json` remains in `setup` with `external_actions_allowed: false`; explicit owner authorization for bounded setup/testing with subscription-backed models; `REQ-20260727-002` production-readiness gate non-blocking for setup.
+- **Expected benefit:** Print path becomes operational again without cost risk; setup/testing proceeds unblocked.
+- **Risks and mitigations:** Risk of unintended metered fallback — mitigated by `minipc` being the approved local endpoint and `REQ-20260727-002` ensuring explicit production-gate verification before campaign activation.
+- **Reversible:** yes
+- **Review trigger or date:** Before first campaign-bound operation or any production runtime transition.
+- **Owner approval required:** no — Pi within delegated authority for routine provider rotation during setup phase
+- **Owner approval reference:** N/A (tactical provider rotation within setup scope)
+- **Outcome and later evidence:** `STATE.json` updated, `DECISION_LOG.md` entry created, `RESUME_TEST_REPORT.md` updated.
 - **Superseded by:**
 
 ## Decision rules

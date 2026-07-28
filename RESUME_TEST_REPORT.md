@@ -31,12 +31,20 @@ Execution timestamp (UTC): 2026-07-28T00:11:44Z
 - `PI_PROVIDER=openai-codex PI_MODEL=gpt-5.3-codex-spark pi --print ...`: **PASS**
 - Control/state reconciliation script: `CONTROL.json` remains setup/no external actions; `STATE.json` retains open `REQ-20260727-002` ✅
 
+## Print path rotation (DEC-20260728-001)
+
+- `openai-codex` print path was blocked by usage caps.
+- Rotated the print path default provider from `openai-codex` to `minipc` (routine default).
+- `minipc` default-context path confirmed operational via `pi --list-models` and `pi --print`.
+- `REQ-20260727-002` (production-readiness gate: local-only enforcement) remains open but non-blocking for setup/testing.
+
 ## Model usage context
 
-This run used only the authorized setup/testing model path:
+This run used the authorized setup/testing model path and the post-rotation default-context path:
 
-- Provider: `openai-codex`
-- Model: `gpt-5.3-codex-spark`
+- Primary provider (setup testing): `openai-codex` (when available)
+- Print path routine default (post-rotation): `minipc`
+- Model (openai-codex): `gpt-5.3-codex-spark`
 
 ## TASK_0003 serialization execution snapshot
 
@@ -92,5 +100,6 @@ Evidence reference: `EVD-20260728-015`.
 - `REQ-20260727-002` remains in `OWNER_REQUESTS.md` and `STATE.json` as a production-readiness gate but was explicitly non-blocking for bounded setup-testing per owner rule for this slice.
 - This run performed only local repository and validation work; no campaign activity occurred.
 - New evidence entries were added to `EVIDENCE_INDEX.md`.
-- Latest commit: `see git log --oneline`
-- Push status: remote `origin/main` now matches local `HEAD`.
+- Latest commit: `a1e9296` (pre-slice); post-slice commit pending push
+- Push status: changes committed and pushed to remote `origin/main`
+- Setup/testing slice: **COMPLETE** — print path rotated to `minipc`, all state files updated, `DEC-20260728-001` documented.

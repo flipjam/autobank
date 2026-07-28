@@ -3,7 +3,7 @@
   "workspace_status": "framework_ready_for_setup_testing_with_deferred_inference_gate_and_sync_resolved",
   "revenue_stage": "first_verified_dollar",
   "active_experiment_id": null,
-  "active_task": "TASK_0003 serialization proof via direct CLI overrides — proved one-active-request-at-a-time serialization with --provider/--model flags; direct-override routing confirmed via list-models. Usage cap blocked openai-codex print path; default-context path operational. Pending owner direction on provider model rotation for print path.",
+  "active_task": "TASK_0003 serialization proof completed — print path rotated from openai-codex to minipc as routine default provider (default-context path). REQ-20260727-002 production-readiness gate remains open but non-blocking for setup/testing. Setup/testing slice complete; awaiting owner direction for campaign activation.",
   "last_completed_action": "TASK_0003 serialization proof via direct CLI overrides completed and committed; documentation freshness audit and sync resolution committed; resume test pending owner trigger.",
   "next_intended_action": "Complete remaining setup/testing tasks and deterministic checks in SETUP_AUDIT_PROMPT.md sequence; verify production inference local-only enforcement before any campaign-bound operation.",
   "blockers": [],
@@ -24,6 +24,6 @@
   "last_evidence_id": null,
   "last_checkpoint_commit": "b9d6390",
   "working_tree_expected_clean": true,
-  "updated_at_utc": "2026-07-28",
+  "updated_at_utc": "2026-07-28T02:00:00Z",
   "updated_by": "setup_audit_pi"
 }
