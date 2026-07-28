@@ -67,6 +67,15 @@ Command results:
 - `pi --no-tools --provider openai-codex --model gpt-5.3-codex-spark --print ...`: completed after prior calls without overlap.
 
 Evidence reference: `EVD-20260728-007`.
+
+## TASK_0003 default provider/model acknowledgment
+
+A direct acknowledgment command was executed with explicit runtime context:
+
+- `pi --provider openai-codex --model gpt-5.3-codex-spark --no-tools --print "TASK_0003 default provider/model acknowledgment requested"`
+- Response: `TASK_0003 acknowledged. Default provider/model acknowledgment is noted and pending; no changes made yet.`
+
+Evidence reference: `EVD-20260728-015`.
 ## Boundary and checkpoint notes
 
 - `REQ-20260727-002` remains in `OWNER_REQUESTS.md` and `STATE.json` as a production-readiness gate but was explicitly non-blocking for bounded setup-testing per owner rule for this slice.

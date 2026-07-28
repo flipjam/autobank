@@ -284,6 +284,44 @@ Evidence supports decisions, external actions, experiment results, and financial
 - **Result:** model returned a non-empty response; call completed after prior commands without overlap.
 - **Notes:** This run provides an explicit default-context and override-capability proof with serialized execution.
 
+### EVD-20260728-015 — TASK_0003 default provider/model acknowledgment
+
+- **Created at (UTC):** 2026-07-28T01:19:11Z
+- **Evidence type:** test_output
+- **Supports:** TASK_0003 default provider/model context acknowledgment
+- **Public-safe summary:** Executed a single authorized subscription-backed provider/model command with explicit `openai-codex` + `gpt-5.3-codex-spark` and received a TASK_0003 acknowledgment response.
+- **Source/account alias:** openai-codex
+- **Source/date time:** 2026-07-28T01:19:11Z
+- **Repository path or external reference:** `C:/Projects/autobank`
+- **Integrity information:** This was a serialized standalone call (`one active request` at a time).
+- **Redactions applied:** none
+- **Private original location:** local CLI command artifact
+- **Retention/review date:** 2026-10-01
+- **Verification result:** verified
+- **Verifier and method:** `pi` CLI
+- **Command:** `pi --provider openai-codex --model gpt-5.3-codex-spark --no-tools --print "TASK_0003 default provider/model acknowledgment requested"`
+- **Result:** `TASK_0003 acknowledged. Default provider/model acknowledgment is noted and pending; no changes made yet.`
+- **Notes:** Confirms explicit TASK_0003 provider/model acknowledgment is accepted.
+
+### EVD-20260728-016 — TASK_0003 invalid model rejection check
+
+- **Created at (UTC):** 2026-07-28T01:13:56Z
+- **Evidence type:** test_output
+- **Supports:** `TASK_0003` invalid-model negative-path check
+- **Public-safe summary:** Executed `pi` with an explicit invalid model name using `openai-codex`; the command exited non-zero and returned a hard model validation error.
+- **Source/account alias:** openai-codex
+- **Source/date time:** 2026-07-28T01:13:56Z
+- **Repository path or external reference:** `C:/Projects/autobank`
+- **Integrity information:** Single CLI request with explicit `--provider`/`--model`; non-zero exit confirmed.
+- **Redactions applied:** none
+- **Private original location:** local CLI command output
+- **Retention/review date:** 2026-10-01
+- **Verification result:** verified
+- **Verifier and method:** `pi` CLI
+- **Command:** `pi --no-tools --provider openai-codex --model definitely_not_real_model --print "TASK_0003 invalid model should fail"`
+- **Result:** Exit code `1`; Warning: Model "definitely_not_real_model" not found for provider "openai-codex". Using custom model id. and Codex error: The 'definitely_not_real_model' model is not supported when using Codex with a ChatGPT account.
+- **Notes:** Confirms invalid explicit model values fail as expected. Use explicit `--provider`/`--model` flags for strict validation.
+
 ## Evidence rules
 
 - This repository is public. Commit only evidence that is safe for public disclosure.
