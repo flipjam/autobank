@@ -37,8 +37,12 @@ Use this plan after a restart event, transient failure, or owner-requested revie
    - `CONTROL.json`
    - `MISSION.md`
    - `AUTHORIZED_RESOURCES.md`
+   - `AGENTS.md`
    - `STATE.json`
    - `OWNER_REQUESTS.md`
+   - `RUNBOOK.md`
+   - Current owner-approved task/campaign specification in `EXPERIMENT_LOG.md`
+   - Linked records: `EXTERNAL_ACTIONS.md`, `EVIDENCE_INDEX.md`, `DECISION_LOG.md`
 3. Verify state fields match expectations:
    - `STATE.json.workspace_status`
    - `STATE.json.active_task`
