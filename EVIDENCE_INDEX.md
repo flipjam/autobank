@@ -110,6 +110,27 @@ Evidence supports decisions, external actions, experiment results, and financial
 - **Verifier and method:**
 - **Notes:**
 
+### EVD-20260728-002 — Latest bounded model validation evidence
+
+- **Created at (UTC):** 2026-07-28T00:11:44Z
+- **Evidence type:** test_output
+- **Supports:** bounded setup/testing run proof of model-path interaction
+- **Public-safe summary:** Captured and recorded the model-list and print-call outputs used by this run.
+- **Source/account alias:** openai-codex
+- **Source date/time:** 2026-07-28T00:11:44Z
+- **Repository path or external reference:** `C:/Projects/autobank`
+- **Integrity information:** Commands were executed with explicit provider/model environment variables and returned expected non-empty outputs.
+- **Redactions applied:** none
+- **Private original location:** local CLI output artifacts
+- **Retention/review date:** 2026-10-01
+- **Verification result:** verified
+- **Verifier and method:** `pi` CLI
+- **Command:** `PI_PROVIDER=openai-codex PI_MODEL=gpt-5.3-codex-spark pi --list-models`
+- **Result:** Listing included `openai-codex  gpt-5.3-codex-spark  128K     128K     yes       no`.
+- **Command:** `PI_PROVIDER=openai-codex PI_MODEL=gpt-5.3-codex-spark pi --print "Acknowledge: setup/testing slice model authorization and REQ-20260727-002 remains non-blocking for this slice."`
+- **Result:** `Acknowledged. For this setup/testing slice, the temporary model-usage authorization stands, and **REQ-20260727-002** remains **non-blocking** for now; I’ll treat it as a **production-readiness gate** only.`
+- **Notes:** Verifies required model command usage for this slice.
+
 ## Evidence rules
 
 - This repository is public. Commit only evidence that is safe for public disclosure.
