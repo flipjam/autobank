@@ -50,6 +50,17 @@ For TASK_0003, model-runtime requests were executed serially (no overlapping `pi
 
 This serialized sequence and terminal-failure/retry ordering is recorded in **`EVD-20260728-006`**.
 
+## TASK_0003 invalid provider rejection check
+
+A direct invalid-provider check was executed in a dedicated request:
+
+- Command: `pi --provider definitely_not_real_provider --model nope --print "TASK_0003 invalid provider check"`
+- Result: non-zero exit (`CODE:1`) and hard validation failure (`Unknown provider`).
+
+This check was run after completing previous TASK_0003 calls and confirms that negative-path input is rejected immediately and serially (no concurrent request).
+
+Evidence reference: **`EVD-20260728-017`**.
+
 ## TASK_0003 default-context proof sequence (explicit request)
 
 A separate verification run in default context confirmed one active model request at a time:

@@ -322,6 +322,24 @@ Evidence supports decisions, external actions, experiment results, and financial
 - **Result:** Exit code `1`; Warning: Model "definitely_not_real_model" not found for provider "openai-codex". Using custom model id. and Codex error: The 'definitely_not_real_model' model is not supported when using Codex with a ChatGPT account.
 - **Notes:** Confirms invalid explicit model values fail as expected. Use explicit `--provider`/`--model` flags for strict validation.
 
+### EVD-20260728-017 — TASK_0003 invalid provider rejection check
+
+- **Created at (UTC):** 2026-07-28T02:06:52Z
+- **Evidence type:** test_output
+- **Supports:** TASK_0003 negative-path handling
+- **Public-safe summary:** Executed a strict invalid-provider `pi` call and confirmed it exits non-zero immediately with a provider-not-found error, while preserving one-active-request sequencing.
+- **Source/account alias:** local
+- **Source/date time:** 2026-07-28T02:06:52Z
+- **Repository path or external reference:** `C:/Projects/autobank`
+- **Integrity information:** Single CLI command with a closed-form negative input; no model call was attempted.
+- **Redactions applied:** none
+- **Private original location:** `evidence/task0003/invalid_provider.log`
+- **Retention/review date:** 2026-10-01
+- **Verification result:** verified
+- **Verifier and method:** `pi` CLI
+- **Command:** `pi --provider definitely_not_real_provider --model nope --print "TASK_0003 invalid provider check"`
+- **Result:** `CODE:1`; output `Error: Unknown provider "definitely_not_real_provider". Use --list-models to see available providers/models.`
+- **Notes:** Confirms strict provider validation in invalid input conditions.
 ## Evidence rules
 
 - This repository is public. Commit only evidence that is safe for public disclosure.
