@@ -1,0 +1,1 @@
+TASK_0002	work did not verify: VERIFY script is not fully executable-to-green on this environment as provided (fails on `git fetch --ff-only`, and checkpoint diff check), so acceptance bar is not fully met despite otherwise present required artifacts/controls.	yolo-accepted
