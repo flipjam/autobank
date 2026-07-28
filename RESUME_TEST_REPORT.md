@@ -38,6 +38,35 @@ This run used only the authorized setup/testing model path:
 - Provider: `openai-codex`
 - Model: `gpt-5.3-codex-spark`
 
+## TASK_0003 serialization execution snapshot
+
+For TASK_0003, model-runtime requests were executed serially (no overlapping `pi` invocations):
+
+- `pi --list-models` completed first.
+- `pi --no-tools --print ...` completed only after the previous call finished.
+- Provider/model override `pi --no-tools --provider openai-codex --model gpt-5.3-codex-spark --print ...` completed next.
+- A forced terminal failure probe (`timeout 5 ... pi --print ...`) returned shell code **124** (timeout).
+- A retry `pi --no-tools --print ...` was executed only after the failed probe terminated.
+
+This serialized sequence and terminal-failure/retry ordering is recorded in **`EVD-20260728-006`**.
+
+## TASK_0003 default-context proof sequence (explicit request)
+
+A separate verification run in default context confirmed one active model request at a time:
+
+- `START_LIST=2026-07-28T01:03:05.234Z`
+- `END_LIST=2026-07-28T01:03:27.923Z`
+- `START_PRINT=2026-07-28T01:03:28.064Z`
+- `END_PRINT=2026-07-28T01:04:04.330Z`
+- `START_PROVIDER_OVERRIDE=2026-07-28T01:04:04.835Z`
+- `END_PROVIDER_OVERRIDE=2026-07-28T01:04:40.622Z`
+
+Command results:
+- `pi --list-models` (default runtime): success (`minipc` and `openai-codex` listed).
+- `pi --no-tools --print "TASK_0003_DEFAULT_CONTEXT_OK"`: success (`TASK_0003_DEFAULT_CONTEXT_OK`).
+- `pi --no-tools --provider openai-codex --model gpt-5.3-codex-spark --print ...`: completed after prior calls without overlap.
+
+Evidence reference: `EVD-20260728-007`.
 ## Boundary and checkpoint notes
 
 - `REQ-20260727-002` remains in `OWNER_REQUESTS.md` and `STATE.json` as a production-readiness gate but was explicitly non-blocking for bounded setup-testing per owner rule for this slice.

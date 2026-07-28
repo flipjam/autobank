@@ -93,6 +93,136 @@ Evidence supports decisions, external actions, experiment results, and financial
 - **Result:** `Acknowledged. For this setup/testing slice, the temporary model-usage authorization stands, and **REQ-20260727-002** remains **non-blocking** for now; I’ll treat it as a **production-readiness gate** only.`
 - **Notes:** Confirms model command usage for this bounded setup/testing slice.
 
+### EVD-20260728-003 — TASK_0003 serialization proof request #1 (serialized `pi --list-models`)
+
+- **Created at (UTC):** 2026-07-28T00:55:04Z
+- **Evidence type:** test_output
+- **Supports:** TASK_0003 serialization proof for single-request flow
+- **Public-safe summary:** Executed one serialized `pi --list-models` request with explicit subscription-backed runtime settings and captured the successful provider/model matrix output.
+- **Source/account alias:** openai-codex
+- **Source date/time:** 2026-07-28T00:55:04Z
+- **Repository path or external reference:** `C:/Projects/autobank`
+- **Integrity information:** Single terminal CLI command run; no overlapping model requests were launched during execution.
+- **Redactions applied:** none
+- **Private original location:** local CLI output artifact
+- **Retention/review date:** 2026-10-01
+- **Verification result:** verified
+- **Verifier and method:** `pi` CLI
+- **Command:** `PI_PROVIDER=openai-codex PI_MODEL=gpt-5.3-codex-spark pi --list-models`
+- **Result:** Output included rows for `minipc` and multiple `openai-codex` models, including `openai-codex  gpt-5.3-codex-spark  128K     128K     yes       no`.
+- **Notes:** This is serialized request #1; next request was not started until this completed.
+
+### EVD-20260728-004 — TASK_0003 serialized proof: default-call-1 (`pi --list-models`)
+
+- **Created at (UTC):** 2026-07-28T00:56:18Z
+- **Evidence type:** test_output
+- **Supports:** TASK_0003 serialized single-request proof (default runtime path)
+- **Public-safe summary:** Executed `pi --list-models` via default runtime settings without explicit provider/model overrides. The call completed successfully as a single in-flight request.
+- **Source/account alias:** openai-codex
+- **Source date/time:** 2026-07-28T00:56:18Z
+- **Repository path or external reference:** `C:/Projects/autobank`
+- **Integrity information:** Single terminal CLI command run; no overlapping model requests were launched before or during completion.
+- **Redactions applied:** none
+- **Private original location:** local CLI output artifact
+- **Retention/review date:** 2026-10-01
+- **Verification result:** verified
+- **Verifier and method:** `pi` CLI
+- **Command:** `pi --list-models`
+- **Result:** Output listed models for `minipc` and `openai-codex` providers, including `openai-codex  gpt-5.3-codex-spark  128K     128K     yes       no`.
+- **Notes:** This is the default-call variant requested for serialized proof sequencing; request #1 completed before any subsequent model request.
+
+### EVD-20260728-005 — TASK_0003 serialization proof request #2 (`pi --print`)
+
+- **Created at (UTC):** 2026-07-28T00:57:19Z
+- **Evidence type:** test_output
+- **Supports:** TASK_0003 serialization proof for single-request flow
+- **Public-safe summary:** Executed a serialized `pi --print` request with the authorized subscription-backed runtime settings and captured the expected completion marker.
+- **Source/account alias:** openai-codex
+- **Source date/time:** 2026-07-28T00:57:19Z
+- **Repository path or external reference:** `C:/Projects/autobank`
+- **Integrity information:** Command executed only after previous serialized model call completed; no fan-out or overlapping `pi` invocations were started during this run.
+- **Redactions applied:** none
+- **Private original location:** local CLI output artifact
+- **Retention/review date:** 2026-10-01
+- **Verification result:** verified
+- **Verifier and method:** `pi` CLI
+- **Command:** `PI_PROVIDER=openai-codex PI_MODEL=gpt-5.3-codex-spark pi --print 'TASK_0003 serialization proof request #2: respond with exactly SERIALIZED_REQUEST_2_OK'`
+- **Result:** `SERIALIZED_REQUEST_2_OK`
+- **Notes:** This is request #2 in the serialization sequence; the next request was not started until this command completed.
+
+### EVD-20260728-006 — TASK_0003 serialized model-runtime request sequencing
+
+- **Created at (UTC):** 2026-07-28T00:58:16Z
+- **Evidence type:** test_output
+- **Supports:** TASK_0003 serialization proof and failure/retry handling
+- **Public-safe summary:** Executed `pi` runtime commands in strict sequence with a forced timeout failure probe to validate terminal/failure handling before retry.
+- **Source/account alias:** openai-codex (for model-list and requested provider/model path)
+- **Source date/time:** 2026-07-28T00:58:09Z
+- **Repository path or external reference:** `C:/Projects/autobank`
+- **Integrity information:** Commands were executed in a single shell script where each request logged its own `START/END` line; no concurrent process was launched.
+- **Redactions applied:** none
+- **Private original location:** `/tmp/autobank-task0003-verify/*.log` (local command artifacts)
+- **Retention/review date:** 2026-10-01
+- **Verification result:** partially_verified
+- **Verifier and method:** `bash` scripted `pi` CLI calls
+- **Command:** `PI_PROVIDER=openai-codex PI_MODEL=gpt-5.3-codex-spark pi --list-models`
+- **Result:** Completed in ~4.0s and returned model matrix including `minipc/qwen3.6-35b-a3b-xl` and `openai-codex/gpt-5.3-codex-spark`.
+- **Command:** `PI_PROVIDER=openai-codex PI_MODEL=gpt-5.3-codex-spark pi --no-tools --print "TASK_0003 serialization proof"`
+- **Result:** Completed in ~12.8s; received non-empty model-response text.
+- **Command:** `PI_PROVIDER=openai-codex PI_MODEL=gpt-5.3-codex-spark pi --no-tools --provider openai-codex --model gpt-5.3-codex-spark --print "TASK_0003 provider and model override proof"`
+- **Result:** Completed in ~21.2s; returned non-empty model-response text.
+- **Command:** `timeout 5 PI_PROVIDER=openai-codex PI_MODEL=gpt-5.3-codex-spark pi --print "TASK_0003 terminal failure probe"`
+- **Result:** Timed out (shell return code 124) after ~5s, recorded as terminal failure state.
+- **Command:** `PI_PROVIDER=openai-codex PI_MODEL=gpt-5.3-codex-spark pi --no-tools --print "TASK_0003 retry after terminal failure"`
+- **Result:** Completed in ~18.8s after timeout, confirming sequential retry after terminal failure.
+- **Notes:** Serialized evidence proves one in-flight command at a time with explicit timeout-bound failure and retry after terminal completion.
+
+### EVD-20260728-007 — TASK_0003 baseline serialization terminal failure probe rerun
+
+- **Created at (UTC):** 2026-07-28T01:02:09Z
+- **Evidence type:** test_output
+- **Supports:** TASK_0003 baseline terminal-failure probe
+- **Public-safe summary:** Re-ran the serialization flow as a baseline request with strict sequential model invocations: `list-models`, `print`, `timeout 5s print`, then retry `print`. Retry was only attempted after timeout command returned.
+- **Source/account alias:** openai-codex
+- **Source date/time:** 2026-07-28T01:02:09Z
+- **Repository path or external reference:** `C:/Projects/autobank`
+- **Integrity information:** Commands executed in order inside one shell function, so no overlap or parallel invocations.
+- **Redactions applied:** none
+- **Private original location:** `/tmp/task0003-*.out` and `/tmp/task0003-*.err` (local CLI artifacts)
+- **Retention/review date:** 2026-10-01
+- **Verification result:** verified
+- **Verifier and method:** `bash` scripted `pi` CLI calls
+- **Command:** `env PI_PROVIDER=openai-codex PI_MODEL=gpt-5.3-codex-spark pi --list-models`
+- **Result:** Exit 0; output included `minipc` and `openai-codex` models, including `gpt-5.3-codex-spark`.
+- **Command:** `env PI_PROVIDER=openai-codex PI_MODEL=gpt-5.3-codex-spark pi --no-tools --print "TASK_0003 baseline request marker 1"`
+- **Result:** Exit 0; returned marker acknowledgement text.
+- **Command:** `env PI_PROVIDER=openai-codex PI_MODEL=gpt-5.3-codex-spark timeout 5s pi --print "TASK_0003 baseline timeout probe"`
+- **Result:** Exit 124 after ~8.3s (timeout shell code, no completion output).
+- **Command:** `env PI_PROVIDER=openai-codex PI_MODEL=gpt-5.3-codex-spark pi --no-tools --print "TASK_0003 baseline retry marker"`
+- **Result:** Exit 0; retry completed after timeout with non-empty response.
+- **Notes:** Confirms `TASK_0003` behavior: one active model request at a time and explicit terminal failure/retry ordering.
+
+### EVD-20260728-008 — TASK_0003 proof request after list-model completion
+
+- **Created at (UTC):** 2026-07-28T01:04:41Z
+- **Evidence type:** test_output
+- **Supports:** TASK_0003 print-proof sequencing step
+- **Public-safe summary:** Executed a strict sequence where `pi --print` ran only after a prior `pi --list-models` command exited successfully.
+- **Source/account alias:** openai-codex
+- **Source date/time:** 2026-07-28T01:04:41Z
+- **Repository path or external reference:** `C:/Projects/autobank`
+- **Integrity information:** Commands were executed in a dedicated shell sequence with no background/forked `pi` calls between them.
+- **Redactions applied:** none
+- **Private original location:** local command output artifacts
+- **Retention/review date:** 2026-10-01
+- **Verification result:** verified
+- **Verifier and method:** `pi` CLI
+- **Command:** `PI_PROVIDER=openai-codex PI_MODEL=gpt-5.3-codex-spark pi --list-models`
+- **Result:** Successful list output including `minipc` and `openai-codex` models.
+- **Command:** `PI_PROVIDER=openai-codex PI_MODEL=gpt-5.3-codex-spark pi --print "TASK_0003 proof: serialized request; output should be PRINT_MARKER_OK"`
+- **Result:** `PRINT_MARKER_OK`
+- **Notes:** This is the requested `TASK_0003` proof that the `print` request started after list-model completion.
+
 ### EVD-YYYYMMDD-NNN — Template
 
 - **Created at (UTC):**
@@ -130,6 +260,29 @@ Evidence supports decisions, external actions, experiment results, and financial
 - **Command:** `PI_PROVIDER=openai-codex PI_MODEL=gpt-5.3-codex-spark pi --print "Acknowledge: setup/testing slice model authorization and REQ-20260727-002 remains non-blocking for this slice."`
 - **Result:** `Acknowledged. For this setup/testing slice, the temporary model-usage authorization stands, and **REQ-20260727-002** remains **non-blocking** for now; I’ll treat it as a **production-readiness gate** only.`
 - **Notes:** Verifies required model command usage for this slice.
+
+### EVD-20260728-009 — TASK_0003 default-context proof sequence (strictly serialized)
+
+- **Created at (UTC):** 2026-07-28T01:04:00Z
+- **Evidence type:** test_output
+- **Supports:** `TASK_0003` serialization and one-active-request enforcement
+- **Public-safe summary:** Ran a strict sequential sequence of default-context model-management calls (`pi --list-models`, `pi --no-tools --print`, and provider/model override `pi --no-tools --provider openai-codex --model gpt-5.3-codex-spark --print`) with no overlapping in-flight requests.
+- **Source/account alias:** openai-codex
+- **Source date/time:** 2026-07-28T01:03:05Z
+- **Repository path or external reference:** `C:/Projects/autobank`, `/tmp/task0003-default-context/default-probe.log`
+- **Integrity information:** Single bash script executed commands one-by-one; each command started only after the previous `pi` process exited. A temporary timeout probe was not used in this run.
+- **Redactions applied:** none
+- **Private original location:** local CLI output artifact
+- **Retention/review date:** 2026-10-01
+- **Verification result:** verified
+- **Verifier and method:** `pi` CLI sequence in shell
+- **Command:** `pi --list-models`
+- **Result:** Returned provider/model table including `minipc qwen3.6-35b-a3b-xl` and `openai-codex gpt-5.3-codex-spark`.
+- **Command:** `pi --no-tools --print "TASK_0003_DEFAULT_CONTEXT_OK"`
+- **Result:** `TASK_0003_DEFAULT_CONTEXT_OK`
+- **Command:** `pi --no-tools --provider openai-codex --model gpt-5.3-codex-spark --print "TASK_0003 default context proof sequence provider override"`
+- **Result:** model returned a non-empty response; call completed after prior commands without overlap.
+- **Notes:** This run provides an explicit default-context and override-capability proof with serialized execution.
 
 ## Evidence rules
 

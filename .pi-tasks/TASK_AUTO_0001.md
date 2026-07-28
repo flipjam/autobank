@@ -3,7 +3,7 @@ id: TASK_AUTO_0001
 state: in_progress
 phase: done
 created_at: 2026-07-27T23:48:03.751Z
-updated_at: 2026-07-28T00:29:08.694Z
+updated_at: 2026-07-28T01:04:41Z
 title: You are executing the owner-authorized controlled Autobank restart and resume test.
 ---
 
@@ -172,7 +172,7 @@ A1: yes—perform a dedicated preflight durable-record reconciliation pass first
 
 - [x] TASK_0001  Change to `C:\Projects\autobank` and run this only as bounded setup/testing work.
 - [x] TASK_0002  Use the authorized faster subscription-backed model for this bounded test.
-- [ ] Use one active model request at a time.
+- [x] TASK_0003  Use one active model request at a time.
 - [ ] Perform the entire test yourself and do not ask the owner to run routine Git, validation, documentation, or checkpoint commands.
 - [ ] Prohibit campaign/revenue/external side effects beyond commits and pushes to flipjam/autobank.
 - [ ] Inspect before changing anything: repository identity, current branch/upstream, remotes, local HEAD, origin/main HEAD, working-tree status, and ahead/behind count.
